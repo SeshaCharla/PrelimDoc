@@ -1,0 +1,39 @@
+\input{TitleAndAuthor.tex}
+\documentclass{PurdueThesis}
+\input{UsePackagesAndNewCommands.tex}
+\input{ltx_core/ltx_pkgs.tex}
+\input{ltx_core/lst_style.tex}
+% \input{ltx_core/new_cmds.tex}
+
+
+\begin{document}
+
+\makeatletter
+\renewcommand{\ZZAppendixName}{APPENDIX}
+%%%% \renewcommand{\chaptername}{CHAPTER}
+\def\@@makechapterhead#1{\uppercase{\@chapapp~\thechapter. #1}}
+
+\setcounter{tocdepth}{3}
+
+\maketitle
+
+% Define front matter
+%     dedication
+%     acknowledgments
+%     preface
+%     table of contents
+%     list of tables
+%     list of figures
+%     list of symbols
+%     abbreviations
+%     nomenclature
+%     glossary
+%     abstract
+\input{FrontMatter/ch-front}
+
+%
+% Put chapter \include commands here.
+%
+
+\input{EndStuff/endStuff.tex}
+\end{document}
