@@ -3,7 +3,7 @@
 \input{UsePackagesAndNewCommands.tex}
 \input{ltx_core/ltx_pkgs.tex}
 \input{ltx_core/lst_style.tex}
-% \input{ltx_core/new_cmds.tex}
+\input{ltx_core/new_cmds.tex}
 
 
 \begin{document}
@@ -17,19 +17,31 @@
 
 \maketitle
 
-% Define front matter
-%     dedication
-%     acknowledgments
-%     preface
-%     table of contents
-%     list of tables
-%     list of figures
-%     list of symbols
-%     abbreviations
-%     nomenclature
-%     glossary
-%     abstract
-\input{FrontMatter/ch-front}
+\input{FrontMatter/FrontStuff.tex}
+
+
+\part{Theory: System Identification, Change Detection and Desired Compensation Adaptive Robust Control}
+\chapter{Introduction}
+\chapter{System Identification}
+\chapter{Set Memebership Identification}
+\chapter{Change Detection}
+\chapter{Desired Compensation Adaptive Robust Control}
+
+\part{Static Hover and Hover Transition Control of a Tilted-winged Hexrotor under actuator faults}
+% (Dexterous Hexrotor)
+\chapter{Introduction}
+% Survey of static hover, multirotor control and relevant topics}
+\chapter{Actuator level control and monitoring using RPM feedback}
+\chapter{Dynamic Model with propeller rotational dynamics}
+\chapter{Trajectory generation and control}
+\chapter{Demonstration of Static Hover}
+
+\part{Catalyst degradation (aging) detection and monitoring in diesel engine SCR-ASC systems}
+\chapter{Survey of SCR modelling and diagnostics}
+\chapter{Residence time aware discrete-time modelling and Identification of SCR-ASC systems}
+\chapter{Aging Characterization of SCR-ASC systems}
+\chapter{Demonstration using real-world truck data from Cummins Inc.}
+
 
 %
 % Put chapter \include commands here.
