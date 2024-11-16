@@ -1,5 +1,5 @@
 \section{Ammonia Adsorption/Desorption Process Dynamics}
-\begin{figure}[H]
+\begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{Part3/figs/plug_flow_discrete.png}
     \caption{Discrete plug-flow reactor model}
@@ -53,39 +53,38 @@ Thus,
 \end{align}
 % ==============================================================================
 \subsection{Molar conservation at the scale of residence time}
-
+%===
 The molar storage on the catalyst surface changes at the end of every residence time and a "fresh" set of gaseous
 reactants enters the catalyst chamber. And, within the sample time, the volumetric concentrations of the gaseous
 reactants can be considered constant. \itbf{Let there be $n$ residence times within one sample time.} It is implicitly
 assumed that there are integer number of residence times within one sample time. When that is not the case, the
 resulting is error is attributed to model structure error. Noting that $\lrf{\bullet}$ denotes moles and $\lrb{\bullet}$ denotes the concentration of the species, the molar conservation for the adsorption/desorption process can be written as:
-
+%===
 \begin{align*}
     \mol{NH_3}^{ads} (k + \tau) &= \mol{NH_3}^{ads} (k) + A_{scr} \int_{0}^{\tau} \dot{\con{NH_3}}^{ads} (k) dt\\
     \mol{NH_3}^{ads} (k + 2\tau) &= \mol{NH_3}^{ads} (k + \tau) + A_{scr} \int_{0}^{\tau} \dot{\con{NH_3}}^{ads} (k + \tau) dt\\
     \vdots&\\
     \mol{NH_3}^{ads} (k + n\tau) &= \mol{NH_3}^{ads} (k + (n-1)\tau) + A_{scr} \int_{0}^{\tau} \dot{\con{NH_3}}^{ads} (k + (n-1)\tau) dt
 \end{align*}
-
+%===
 \begin{align*}
     \mol{NH_3}^{ads}(k + 1) = \mol{NH_3}^{ads} (k + n\tau) &= \mol{NH_3}^{ads} (k) + A_{scr} \sum_{i=0}^{n-1} \int_{0}^{\tau} \dot{\con{NH_3}}^{ads} (k + i\tau) dt
 \end{align*}
-
+%==
 Writing the above equation in terms of surface concentrations:
 \begin{align*}
     \con{NH_3}^{ads}(k + 1) = \con{NH_3}^{ads} (k + n\tau) &= \con{NH_3}^{ads} (k) + \underbrace{\sum_{i=0}^{n-1} \int_{0}^{\tau} \dot{\con{NH_3}}^{ads} (k + i\tau)}_{\Omega(k)}   dt
 \end{align*}
-
+%===
 $\Omega(k)$ is the total change in the surface concentration of adsorbed ammonia
 within one sample time.
 
 % ==============================================================================
 \subsection{Calculating the total surface concentration change of adsorbed ammonia within one sample time $\Omega(k)$}
-
+%===
 The volumetric concentrations of the gaseous reactants are assumed to be
 constant within the sample time, while the surface concentrations change at the
 end of every residence time.
-
 \begin{align*}
     \dot{\con{NH_3}}^{ads} (k + i\tau) &= r_{ads} (k + i \tau) - r_{des} (k + i \tau) - r_{scr} (k + i \tau) - r_{oxi} (k + i \tau)\\
     %===
@@ -119,14 +118,14 @@ concentrations within the sample time as:
 \end{align*}
 
 % ==============================================================================
-
 \subsection{Ammonia adsorption/desorption process dynamics model}
 Substituting the expression for $\Omega(k)$ in the equation for
 $\con{NH_3}^{ads}(k + 1)$:
-
+%===
 \begin{align*}
     \con{NH_3}^{ads}(k + 1) &= \con{NH_3}^{ads} (k) + n \tau \lr{\Gamma \gamma_{ads} (k) - \sigma(k) \gamma_{des} (k)}\\
-    &= \con{NH_3}^{ads}(k) + n \tau \Gamma k_{ads} \con{NH_3}^{in}(k) - n \tau \sigma(k) \lr{k_{ads} \con{NH_3}^{in}(k) + k_{des} + k_{scr} \con{NO_x}^{in}(k) + k_{oxi}}
+    &= \con{NH_3}^{ads}(k) + n \tau \Gamma k_{ads} \con{NH_3}^{in}(k) \\
+    &\quad - n \tau \sigma(k) \lr{k_{ads} \con{NH_3}^{in}(k) + k_{des} + k_{scr} \con{NO_x}^{in}(k) + k_{oxi}}
 \end{align*}
-
+%===
 \input{Part3/5_subs/4_subs/sig_approx.tex}

@@ -32,11 +32,12 @@ Thus,
 Note that $f_{\phi_1}$ is a scalar. Multiplying $f_{\phi_1}(k+1)$ on both sides of equation (\ref{eqn::r_nox_1}):
 \begin{align*}
       &f_{\phi_1}(k+1) \lrf{\pmb \phi_1^T(k) \pmb \theta_1} x_3(k+1)
-                = \lrf{{x_1(k+1) - u_1(k)}} f_{\phi_1}(k+1)\lrf{\pmb \phi_3^T (k) \pmb \theta_3}
-                + f_{\phi_1}(k+1)\lrf{\pmb \phi_1^T(k) \pmb \theta_1} \lrf{\pmb \phi^T_{\tau, ur}(k) \pmb \theta_\Gamma}\\
-      %===
-      &\implies {x_1(k+2) - u_1(k+1)} = \lrf{{x_1(k+1) - u_1(k)}} f_{\phi_1}(k+1)\lrf{\pmb \phi_3^T (k) \pmb \theta_3}
-                + \lrf{ \lr{\pmb \phi_1^T(k+1) \pmb \theta_1} \kron \lr{\pmb \phi^T_{\tau, ur}(k) \pmb \theta_\Gamma}}
+                = \lrf{{x_1(k+1) - u_1(k)}} f_{\phi_1}(k+1)\lrf{\pmb \phi_3^T (k) \pmb \theta_3} \\
+      & \qquad \qquad \qquad + f_{\phi_1}(k+1)\lrf{\pmb \phi_1^T(k) \pmb \theta_1} \lrf{\pmb \phi^T_{\tau, ur}(k) \pmb \theta_\Gamma}
+\end{align*}
+\begin{align*}
+      &\implies {x_1(k+2) - u_1(k+1)} = \lrf{{x_1(k+1) - u_1(k)}} f_{\phi_1}(k+1)\lrf{\pmb \phi_3^T (k) \pmb \theta_3}\\
+      &\qquad \qquad \qquad + \lrf{ \lr{\pmb \phi_1^T(k+1) \pmb \theta_1} \kron \lr{\pmb \phi^T_{\tau, ur}(k) \pmb \theta_\Gamma}}
         \quad \lrb{\because \ref{eqn::f_phi_prop}}
 \end{align*}
 Writing in one time step ahead form:
