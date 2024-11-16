@@ -1,0 +1,24 @@
+\chapter{Discrete Nonlinear Model Development for Urea SCR-ASC Dynamics}
+
+One of the fundamental assumptions in the diesel engine SCR-ASC modelling, CSTR, reverts the causality in the reaction
+rate constants, when the model order is reduced by considering a single cell. The present work circumvents the problem
+by discarding the CSTR assumption and modelling the time evolution of the sensor signals when a "plug" or "parcel" of
+the exhaust gasses flows through the chamber.
+
+Such a time evolution introduces constraints on the model due to sampling limitations. To capture the transient
+dynamics, the sampling time should be significantly smaller than the "residence time" of the reactants inside the
+SCR-ASC chamber. If that is not the case as is the situation with the present available test and truck data, time integrated states assuming zero-order holds during the transients need to be introduced into the model and the input-output model can be derived from the resulting state-space model.
+
+The modelling approach involves following the evolution of the measurement signals at the input and the output of the
+system. As the plug of fluid flows through the chamber, these measurements can be correlated based on the conservation
+of moles within the fluid plug.
+
+
+\input{Part3/5_subs/4_NH3ads_proc_dyn.tex}
+%\input{Part3/5_subs/5_NOx_proc_dyn.tex}
+%\input{Part3/5_subs/6_NH3_proc_dyn.tex}
+%\input{Part3/5_subs/7_urea_dosing_proc_dyn.tex}
+%\input{Part3/5_subs/9_proc_dyn_mdl.tex}
+%\input{Part3/5_subs/10_r_nox_mdl.tex}
+%\input{Part3/5_subs/11_validation_results.tex}
+%\input{Part3/5_subs/12_Conclusion.tex}
