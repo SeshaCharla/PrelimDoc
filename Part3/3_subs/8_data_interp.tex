@@ -1,7 +1,8 @@
-\chapter{Test and Truck Data}
-
-The test and truck data provided by Cummins for aging diagnostics consists of measurement related to engine exhaust flow rate, temperature and concentrations of various species at the  inlet of the SCR-ASC chamber (outlet of DPF (Diesel Particulate Filter)) and the tail-pipe (exit of the SCR-ASC) chamber. In the case of test data we have the FTIR (Fourrier Transform Infrared Spectroscopy) sensor's data for $NO_x$ and $NH_3$ concentration which are more accurate (when corrected for bias) than the commercial $NO_x$ sensor's measurements of concentration which is cross-sensitive to ammonia ($NH_3$) in the exhaust. Further, the available test and truck data for testing the model structure needs to be
-in common units. The following table-(\ref{tab::units_mdl}) lists the units used for each of the physical property used.
+\newpage
+\section{Data Interpretation}
+The available test and truck data for testing the model structure needs to be
+got into common units. The following table lists the units used for each
+of the physical property.
 \begin{table}[H]
    \centering
    \begin{tabular}{l l}
@@ -16,15 +17,14 @@ in common units. The following table-(\ref{tab::units_mdl}) lists the units used
         \hline \hline
    \end{tabular}
    \caption{Table of Units used in the Model}
-   \label{tab::units_mdl}
 \end{table}
-The data available with the nomenclature from the database and corresponding units are listed in the following tables-(\ref{tab::test_labels}, \ref{tab::truck_lables}).
+
+The data available and corresponding units are listed in the following table.
 \begin{table}[H]
 \centering
-\small
 \begin{tabular}{l l l }
 \hline \hline
-Model Variable & Truck Data Variable &Units\\
+Model Variable & Road Data Variable &Units\\
 \hline \hline
 $t$   & tod & $s$
 \\
@@ -40,13 +40,12 @@ $u_1$ & pNOxInppm & $ppm$
 \\
 \hline
 \end{tabular}
-\caption{Truck data variables}
-\label{tab::truck_lables}
+\caption{Road data variables}
 \end{table}
-%===
+
+
 \begin{table}[H]
 \centering
-\small
 \begin{tabular}{l l l c}
    \hline \hline
    Variable Name              & Units     & Description & Variable from Model \\ \hline \hline
@@ -73,13 +72,7 @@ V\_SCM\_PPM\_SCR\_OUT\_NOX	   & ppm       & SCR-out NOx (cross-sensitive)
    \hline \hline
 \end{tabular}
 \caption{Test Cell Data Variables}
-\label{tab::test_labels}
 \end{table}
-The data from these channels is filtered using a change detection based RLS filter \cite{gustafsson2000adaptive} for noise removal while preserving the signal jumps. The results of filtering and the power spectral density plots of the data are presented in Appendix-A.
-%====
-\input{Part3/3_subs/3_res_time.tex}
 
-\section{Models for physical properties using the measured signals}
-\input{Part3/3_subs/8_subs/density.tex}
-\input{Part3/3_subs/8_subs/ppm.tex}
-\input{Part3/3_subs/8_subs/vol_flow.tex}
+
+% ==============================================================================
