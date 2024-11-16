@@ -7,7 +7,7 @@
 %     debug - add grid lines/compile times (print variables)
 %     proof - local version of "final"
 %     final - Final publishable version (calls PurdueThesis - requires LuaLaTeX)
-\def\ZZbuildmode{debug}
+\def\ZZbuildmode{final}
 
 % Input arguments required by PurdueThesis
 \input{a-template/te00-template-options.tex}
@@ -28,6 +28,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ducument
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bibliography{Part3/scr_refs}
 
 \begin{document}
 \maketitle
@@ -36,7 +37,25 @@
 \input{b-front/fr0-front.tex}
 
 % Input all chapters here
-% ...
+\part{Theory: System Identification, Change Detection and Desired Compensation Adaptive Robust Control}
+\chapter{Introduction}
+\chapter{System Identification}
+\chapter{Set Memebership Identification}
+\chapter{Change Detection}
+\chapter{Desired Compensation Adaptive Robust Control}
+
+\part{Static Hover and Hover Transition Control of a Tilted-winged Hexrotor under actuator faults}
+% (Dexterous Hexrotor)
+\chapter{Introduction}
+% Survey of static hover, multirotor control and relevant topics}
+\chapter{Actuator level control and monitoring using RPM feedback}
+\chapter{Dynamic Model with propeller rotational dynamics}
+\chapter{Trajectory generation and control}
+\chapter{Demonstration of Static Hover}
+
+\part{Catalyst degradation (aging) detection and monitoring in diesel engine SCR-ASC systems}
+\input{Part3/Part3.tex}
+
 
 % Appendices
 \input{ch8-appendices/ap0-appendices.tex}
