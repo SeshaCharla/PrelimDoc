@@ -1,1 +1,28 @@
 \chapter{CSTR Model and Linearized Model Identification}
+
+A prevalent modeling approach is to approximate the PDE (partial differential equation) model from the plug flow reactor
+assumption into a set of ODEs (ordinary differential equations) using the idealization of the plug-flow reactor into a
+sequence of continuous stirred tank reactors (CSTRs) (\cite{hsieh2011development}, and \cite{nova2014urea}). This
+discretization requires at least 2 CSTRs to capture the system dynamics and causality, thereby increasing the model
+order. Moreover, the reactions considered are generally confined to selected SCR and ASC reactions. The single CSTR
+approach was first justified in \cite{devarakonda2008adequacy} and a nonlinear model was developed using these
+assumptions, which was then linearized for feedback control design (\cite{devarakonda2009model}). With this model,
+observers were designed to estimate the states corresponding to the catalyst's storage (\cite{ma2017observer},
+\cite{jain2020term}). A method for detecting the catalyst's aging by observing the change in the maximum storage
+capacity of the catalyst, modeled as an exponential function of temperature, was also proposed in \cite{ma2017observer}.
+A common theme in these studies is the non-uniqueness in estimating the nonlinear parameters without a priori
+constraints on the actual values. Moreover, these studies assume the availability of all the gaseous states at tail-pipe
+to eliminate the effects of cross-sensitivity of the $NO_x$ sensors, which is not always the case in real-world
+applications.
+
+The present work aims to address these issues by proposing a reduced order model for the SCR-ASC system, whose parameter
+estimation problem would be convex and implicitly considers the $NO_x$ sensor cross-sensitivity. Our approach is based
+on the assumption that the detection of aging can be framed as a state/parameter estimation problem concerning the
+concentration dynamics of the involved gases. Thus, in this paper, we present the development and validation of such a
+reduced order linear model for the SCR-ASC system for diagnostics.
+
+\input{Part3/4_subs/2-MdlPrelim.tex}
+\input{Part3/4_subs/3-MdLin.tex}
+\input{Part3/4_subs/4-LinModIdent.tex}
+\input{Part3/4_subs/5-Conclusion.tex}
+\input{Part3/4_subs/Appendix.tex}

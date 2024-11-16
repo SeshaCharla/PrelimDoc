@@ -1,0 +1,20 @@
+\section{Reduced Order Nonlinear Model}
+
+The SCR-ASC system is a complex system with multiple reactions and transport.
+The operating conditions and concentrations determine the selectivity of
+reactants. The model development involves specific assumptions on these
+characteristics which are aligned with the typical operating conditions and
+system behavior. The CSTR assumption serves as the foundation for developing
+the reaction flow model for SCR reactions. Based on the results of reduced
+order modeling from previous studies including
+\cite{devarakonda2008adequacy}, \cite{jain2023diagnostics}, we reduce the number
+of reactions considered from the full set to three. Initially, we define the
+reaction rate constants. Subsequently, we develop a comprehensive parametric
+nonlinear model based on state definition of molar storage instead of the
+typically used storage fraction state (\cite{nova2014urea}) for consistency with
+experimental measurements and slight reduction in the complexity of
+expressions.
+
+\input{Part3/4_subs/sec2/2#1-RctKin.tex}
+\input{Part3/4_subs/sec2/2#2-UreaInj.tex}
+\input{Part3/4_subs/sec2/2#4-NlStSpc.tex}

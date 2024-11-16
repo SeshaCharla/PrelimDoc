@@ -1,0 +1,58 @@
+\subsection{Nonlinear Statespace Model}
+We have the mass (moles of reactants in/out) balance from the CSTR assumption:
+\begin{multline} \label{eqn::mass_balance}
+    %===
+    \bm{\dot C_{NO} \\  \dot C_{NH_3} \\ \dot M_{NH_3} } = b_v
+    \bm{
+        -R_1 - F C_{NO}\\
+        -R_{4F} + R_{4R} - F C_{NH_3}\\
+        R_{4F} - R_{4R} - R_1 - R_3
+    }
+    +
+    f_vb_v \bm{1 & 0 \\ 0 & 1 \\ 0 & 0} \bm{ C_{NO, in} \\ C_{NH_3, in}}
+    %===
+\end{multline}
+Let,
+\begin{align*}
+    \bm{x_1 \\ x_2 \\ x_3 \\ x_4} = \bm{C_{NO} \\ C_{NH_3} \\ M_{NH_3} \\ C_{NH_3, in}} \qquad &
+    \bm{u_1 \\ u_2 } = \bm{C_{NO, in} \\ u_{inj}}
+\end{align*}
+We have the nonlinear statespace model as:
+\begin{multline}
+    \label{eqn::full_nonlinear}
+     \bm{\dot x_1 \\
+        \dot x_2\\
+        \dot x_3\\
+        \dot x_4} =
+    \bm{
+        -f_{13} x_1 x_3
+        -g_1 x_1
+        \\
+        %===
+        -g_2 x_2
+        + f_{23} x_2 x_3
+        + g_{23} x_3
+        + f_{24} x_4
+        \\
+        %===
+        -f_{32} x_2 x_3
+        -g_3 x_3
+        -f_{31} x_1 x_3
+        + g_{32} x_2
+        \\
+        %===
+        -g_4 x_4
+    }
+    + \bm{b_{11} & 0\\
+          0     & 0\\
+          0     & 0\\
+          0     & b_{42}  }\bm{u_1 \\ u_2 }
+\end{multline}
+The lumped coefficients of the states are defined in the appendix of the chapter.
+
+The sensor used for $NO_x$ measurement is sensitive to the ammonia in the
+tailpipe. This cross-sensitivity $(\chi)$ can be incorporated into the model by writing
+the output equation as:
+\begin{align}\label{eqn::ctrl_out}
+    y_1 &= x_1 + \chi x_2
+\end{align}

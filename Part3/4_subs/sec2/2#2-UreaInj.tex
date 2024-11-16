@@ -1,0 +1,11 @@
+\subsection{Urea Injection Model}
+
+The actual input to the system is urea [from say, AdBlue ($32.5\%$ aqueous urea
+solution) (\cite{nova2014urea})] injection that is converted to ammonia. This can be modelled by the following equation~(\ref{eqn::urea_inj}). The model is based on several assumptions related to the operating conditions. The evaporation of the urea-solutions is considered to be a significantly slower process than its decomposition into ammonia. This leads to the neglect of reaction kinetics, treating evaporation as a first order process in relation to the vapor pressure of the ammonia. The model also assumes a complete decoupling of the injection dynamics from other states. Furthermore, based on observations, the model assumes that urea is entirely converted to ammonia at the very upstream part of the SCR catalyst. These assumptions guide the reparametrization of the equation.
+Let,
+\begin{align*}
+    x_4 &= C_{NH_3, in}, \quad b_u = 2 \frac{ \eta}{N_{urea}}, \quad \omega_u = \frac{1}{\tau}, \quad u_2 = u_{inj}
+\end{align*}
+\begin{equation}{\label{eqn::urea_inj}}
+    \dot x_4 = - \omega_u x_4 +   \frac{\omega_u b_u}{f_v} u_{2}
+\end{equation}

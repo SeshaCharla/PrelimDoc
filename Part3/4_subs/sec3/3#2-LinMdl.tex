@@ -1,0 +1,51 @@
+Utilizing small perturbations to linearize the model would explicitly reveal the dynamics' dependence on temperature and flow rate. Moreover, employing a linear model would broaden the range of tools available for estimator design.
+The perturbation model would bring down the change in
+temperature from exponential to algebraic form. We have the linearized model of the system:
+\begin{multline}\label{eqn::lin_model}
+    \bm{\delta \dot x_1 \\ \delta \dot x_2 \\ \delta \dot x_3 \\ \delta \dot x_4}
+    = \underbrace{\bm{     a_{11} &
+                    0 &
+                    -\bar f_{13} \bar x_1 &
+                    0 \\
+                    %===
+                    0 &
+                    a_{22} &
+                    a_{23} &
+                    \bar f_{24} \\
+                    %===
+                    -\bar f_{31} \bar x_3 &
+                    a_{32} &
+                    a_{33} &
+                    0 \\
+                    %===
+                    0 & 0 & 0 & -g_4
+                    }}_A
+    \bm{\delta x_1 \\ \delta x_2 \\ \delta x_3 \\ \delta x_4}
+            + \underbrace{\bm{ \bar b_{11} &
+                            0 &
+                            \delta f_{13} \bar x_1 \bar x_3 &
+                            b_{14}
+                            \\
+                        %===
+                        0&
+                        0 &
+                        b_{23} &
+                        b_{24} \\
+                        %===
+                        0&
+                        0&
+                        b_{33} &
+                        0
+                        \\
+                        %===
+                        0&
+                        \bar b_{42}&
+                        0&
+                        \delta b_{42} \bar u_2
+                        }}_B
+    \bm{\delta u_1 \\ \delta u_2 \\ \delta T \\ \delta f_v}
+\end{multline}
+where the various symbols are defined in the appendix. Consequently, the output equation for the linearized model is given by:
+\begin{equation}\label{eqn::lin_out}
+    \delta y_1  = \delta x_1 + \chi \delta x_2
+\end{equation}

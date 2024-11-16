@@ -1,0 +1,33 @@
+\subsection*{Regressor Vectors}
+The following are the regressor vectors used for model parameter identification.
+\begin{figure}[H]
+\begin{minipage}{0.45\columnwidth}
+    \begin{align*}
+        \small
+        \pmb \phi_{N_1} &= \bm{\phi_{N_1}^{u_1} & \phi_{N_1}^{u_2} & \phi_{N_1}^T & \phi_{N_1}^F}\\
+       & \phi_{N_1}^{u_1} = \bm{\dddot u_1& \ddot u_1& \dot u_1&  u_1}\\
+       & \phi_{N_1}^{u_2} = \bm{u_2}\\
+       & \phi_{N_1}^T = \bm{\dddot T& \ddot T& \dot T&  T}\\
+       & \phi_{N_1}^F = \bm{\dddot f_v& \ddot f_v& \dot f_v&  f_v}\\
+       %===
+        \pmb \phi_{N_2} &= \bm{\phi_{N_2}^{u_1} & \phi_{N_2}^{u_2} & \phi_{N_2}^T & \phi_{N_2}^F}\\
+       & \phi_{N_2}^{u_1} = \bm{\dot u_1 & u_1}\\
+       & \phi_{N_2}^{u_2} = \bm{\ddot u_2& \dot u_2&  u_2}\\
+       & \phi_{N_2}^T = \bm{\dddot T& \ddot T& \dot T&  T}\\
+       & \phi_{N_2}^F = \bm{\dddot f_v& \ddot f_v& \dot f_v&  f_v}
+       %===
+    \end{align*}
+\end{minipage}
+\begin{minipage}{0.45\columnwidth}
+    \begin{align*}
+        \small
+        \pmb \phi_D(x) &= \bm{-\dddot x& -\ddot x& -\dot x& - x}\\
+        %====
+         \pmb \phi_{N_y} &= \bm{\phi_{N_y}^{u_1} & \phi_{N_y}^{u_2} & \phi_{N_y}^T & \phi_{N_y}^F}\\
+       & \phi_{N_y}^{u_1} = \bm{\dddot u_1& \ddot u_1& \dot u_1&  u_1}\\
+       & \phi_{N_y}^{u_2} = \bm{\dot u_2&  u_2}\\
+       & \phi_{N_y}^T = \bm{\dddot T& \ddot T& \dot T&  T}\\
+       & \phi_{N_y}^F = \bm{\dddot f_v& \ddot f_v& \dot f_v&  f_v}
+    \end{align*}
+\end{minipage}
+\end{figure}

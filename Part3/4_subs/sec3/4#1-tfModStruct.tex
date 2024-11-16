@@ -1,0 +1,94 @@
+\subsection{Transfer function model structure}
+
+Since we have uncorrupted test-cell data for $NO_x$ and $NH_3$ and all the
+inputs at any given time, part of the state-to-input transfer function matrix
+can be estimated using this data. Transforming the state-space model from
+section-\ref{eqn::lin_model} into frequency domain, the model structure would
+be:
+\begin{align*}
+    \bm{\delta x_1 \\ \delta x_2 \\ \hline \delta  x_3 \\ \delta x_4} &= \bm{G_{11} & G_{12} & G_{13} & G_{14}\\
+                G_{21} & G_{22} & G_{23} & G_{24}\\
+                \hline
+                G_{31} & G_{32} & G_{33} & G_{34}\\
+                G_{41} & G_{42} & G_{43} & G_{44}\\
+    }
+    \bm{\delta u_1 \\ \delta u_2 \\ \delta T \\ \delta f_v}
+\end{align*}
+
+With the given data, $G_{1i}'s, G_{2i}'s$ can be estimated. The presumption of
+this approach is that we should be able to get estimates of most of the required
+parameters from these two rows. Thus, the transfer function matrix that can be
+identified using the available data is:
+\begin{align*}
+    G &= \bm{G_{11} & G_{12} & G_{13} & G_{14}\\
+                G_{21} & G_{22} & G_{23} & G_{24}}
+\end{align*}
+
+We have the linearized state-space system matrices from section-\ref{eqn::lin_model}:
+\begin{align*}
+    A &= \bm{-\lr{ \bar f_{13} \bar x_3 + \bar g_1 } &
+                    0 &
+                    -\bar f_{13} \bar x_1 &
+                    0 \\
+                    %===
+                    0 &
+                    \lr{ -\bar g_2 + \bar f_{23} \bar x_3 }&
+                    \lr{\bar f_{23} \bar x_2 + \bar g_{23}}&
+                    \bar f_{24} \\
+                    %===
+                    -\bar f_{31} \bar x_3 &
+                    \lr{-\bar f_{32} \bar x_3 + \bar g_{32} } &
+                    \lr{-\bar f_{32} \bar x_2 - \bar g_3 - \bar f_{31} \bar x_1 } &
+                    0 \\
+                    %===
+                    0 & 0 & 0 & -g_4
+                    }\\
+    %==
+    B &= \bm{ \bar b_{11} &
+                            0 &
+                            \delta f_{13} \bar x_1 \bar x_3 &
+                            \lr{\delta b_{11} \bar u_1- \delta g_1 \bar x_1}
+                            \\
+                        %===
+                        0&
+                        0 &
+                        \lr{-\delta g_{2_T} \bar x_2 + \delta f_{23} \bar x_2 \bar x_3 + \delta g_{23} \bar x_3} &
+                        \lr{-\delta g_{2_F} \bar x_2 + \delta f_{24} \bar x_4 }
+                        \\
+                        %===
+                        0&
+                        0&
+                        \lr{-\delta f_{32} \bar x_2 \bar x_3 - \delta g_3 \bar x_3 - \delta f_{31} \bar x_1 \bar x_3 + \delta g_{32} \bar x_2 } &
+                        0
+                        \\
+                        %===
+                        0&
+                        \bar b_{42}&
+                        0&
+                        \delta b_{42} \bar u_2
+                        }
+\end{align*}
+Ignoring the actual output equation from section-\ref{eqn::lin_model} and
+considering that the first two states are measured, we get:
+\begin{align*}
+    C &= \bm{1 & 0 & 0 & 0 \\
+             0 & 1 & 0 & 0}
+\end{align*}
+Thus the input-to-state transfer function matrix is given by:
+\begin{align*}
+    G &= C(sI-A)^{-1} B\\
+      &= \lrb{\frac{1}{\norm{sI-A}}} C \lr{\adj\lr{sI-A}} B
+      &&\lrb{\because (sI-A)^{-1} = \adj\lr{sI-A}/\det\lr{sI-A}}\\
+      &= \frac{1}{\norm{sI-A}} \lr{\adj\lr{sI-A}[1:2, :]} B
+      && \lrb{\because \text{Structure of C matrix}}\\
+      &= \frac{1}{\norm{sI-A}} M B
+      && \lrb{\because \text{Let, } M = C \lr{\adj\lr{sI-A}} = \adj\lr{sI-A}[1:2, :] }\\
+\end{align*}
+Thus only the first two rows of the adjoint of the $(sI-A)$ matrix are required
+for computing the transfer function matrix.
+
+Rewriting G as:
+\begin{align*}
+    G &= \frac{1}{D} \bm{N_{11} & N_{12} & N_{13} & N_{14}\\
+                         N_{21} & N_{22} & N_{23} & N_{24}}
+\end{align*}

@@ -1,0 +1,30 @@
+% \subsubsection{Denominator Polynomial}
+We have:
+\begin{align*}
+    D = |sI-A| &= \lr{g_4 + s} \times \underbrace{\lr{s^3 + d_2 s^2 + d_1 s + d_0}}_{D^{(3)}}
+\end{align*}
+Where,
+\begin{align*}
+    d_0 &= \left(\bar f_{13} - \bar f_{23}\right) \bar x_{3} + \bar f_{31} \bar x_{1} + \bar f_{32} \bar x_{2} + \bar g_{2} + \bar g_{3} + \bar g_{1}\\
+    &= \left(\bar k_{4F} \bar x_{2} + \bar k_{4F}\right) \Theta + \left(\bar k_{1} - \bar k_{4F}\right) \bar x_{3} \\
+    &\quad + \frac{V^{2} \bar k_{1} \bar x_{1} + V \bar k_{3} + V k_{4R} + 2 \bar f_v}{V}
+\end{align*}
+
+$d_1$ and $d_2$ are quadratic polynomials of nominal state values and
+the storage capacity.
+
+% \begin{align*}
+%     d_2 &=- \bar f_{13} \bar f_{23} \bar x_{3}^{2} + \left(\bar f_{13} \bar f_{32} \bar x_{2} + \bar f_{13} \bar g_{2} + \bar f_{13} \bar g_{3} - \bar f_{23} \bar f_{31} \bar x_{1} - \bar f_{23} \bar g_{3} - \bar f_{23} \bar g_{1} + \bar f_{32} \bar g_{23}\right) \bar x_{3}\\
+%     &\qquad  -  \bar f_{23} \bar g_{32} \bar x_{2} + \bar f_{31} \bar g_{2} \bar x_{1} + \bar f_{31} \bar g_{1} \bar x_{1} + \bar f_{32} \bar g_{2} \bar x_{2} + \bar f_{32} \bar g_{1} \bar x_{2} + \bar g_{2} \bar g_{3} + \bar g_{2} \bar g_{1} + \bar g_{3} \bar g_{1} - \bar g_{23} \bar g_{32}\\
+%     &= \bar k_{4F}^{2} \bar x_{2} \Theta^{2} + \frac{V \bar k_{1} \bar k_{4F} \bar x_{2} + V \bar k_{1} \bar k_{4F} + \bar k_{4F} k_{4R}}{V} \Theta\bar x_{3} + \frac{V^{2} \bar k_{1} \bar k_{4F} \bar x_{1} - V^{2} \bar k_{4F}^{2} \bar x_{2} + V \bar k_{3} \bar k_{4F} + 2 \bar F \bar k_{4F} \bar x_{2} + \bar F \bar k_{4F}}{V} \Theta \\
+%     &\qquad -  \bar k_{1} \bar k_{4F} \bar x_{3}^{2} + \frac{- V^{2} \bar k_{1} \bar k_{4F} \bar x_{1} + V \bar k_{1} \bar k_{3} + V \bar k_{1} k_{4R} - V \bar k_{3} \bar k_{4F} - V \bar k_{4F} k_{4R} + \bar F \bar k_{1} - \bar F \bar k_{4F}}{V} \bar x_{3} \\
+%     &\qquad \qquad + \frac{2 V^{2} \bar F \bar k_{1} \bar x_{1} + 2 V \bar F \bar k_{3} + 2 V \bar F k_{4R} + \bar F^{2}}{V^{2}}
+% \end{align*}
+% \begin{align*}
+%     d_3 &= \left(- \bar f_{13} \bar f_{23} \bar g_{3} + \bar f_{13} \bar f_{32} \bar g_{23}\right) \bar x_{3}^{2} \\
+%     &\qquad + \left(- \bar f_{13} \bar f_{23} \bar g_{32} \bar x_{2} + \bar f_{13} \bar f_{32} \bar g_{2} \bar x_{2} + \bar f_{13} \bar g_{2} \bar g_{3} - \bar f_{13} \bar g_{23} \bar g_{32} - \bar f_{23} \bar f_{31} \bar g_{1} \bar x_{1} - \bar f_{23} \bar g_{3} \bar g_{1} + \bar f_{32} \bar g_{1} \bar g_{23}\right) \bar x_{3} \\
+%     &\qquad \qquad -  \bar f_{23} \bar g_{1} \bar g_{32} \bar x_{2} + \bar f_{31} \bar g_{2} \bar g_{1} \bar x_{1} + \bar f_{32} \bar g_{2} \bar g_{1} \bar x_{2} + \bar g_{2} \bar g_{3} \bar g_{1} - \bar g_{1} \bar g_{23} \bar g_{32}\\
+%     &=  \bar k_{1} \bar k_{4F}^{2} \bar x_{2} \Theta^{2}\bar x_{3} + \frac{\bar F \bar k_{4F}^{2} \bar x_{2}}{V} \Theta^{2} + \frac{\bar k_{1} \bar k_{4F} k_{4R}}{V} \Theta\bar x_{3}^{2} + \frac{- V^{3} \bar k_{1} \bar k_{4F}^{2} \bar x_{2} + V^{2} \bar k_{1} \bar k_{3} \bar k_{4F} + V \bar F \bar k_{1} \bar k_{4F} \bar x_{2} + \bar F \bar k_{4F} k_{4R}}{V^{2}} \Theta\bar x_{3} \\
+%     & \qquad + \frac{V^{2} \bar F \bar k_{1} \bar k_{4F} \bar x_{1} - V^{2} \bar F \bar k_{4F}^{2} \bar x_{2} + V \bar F \bar k_{3} \bar k_{4F} + \bar F^{2} \bar k_{4F} \bar x_{2}}{V^{2}} \Theta + \left(- \bar k_{1} \bar k_{3} \bar k_{4F} - \bar k_{1} \bar k_{4F} k_{4R}\right) \bar x_{3}^{2} \\
+%     &\qquad \qquad + \frac{- V \bar F \bar k_{1} \bar k_{4F} \bar x_{1} + \bar F \bar k_{1} \bar k_{3} + \bar F \bar k_{1} k_{4R} - \bar F \bar k_{3} \bar k_{4F} - \bar F \bar k_{4F} k_{4R}}{V} \bar x_{3} + \frac{V \bar F^{2} \bar k_{1} \bar x_{1} + \bar F^{2} \bar k_{3} + \bar F^{2} k_{4R}}{V^{2}}
+% \end{align*}

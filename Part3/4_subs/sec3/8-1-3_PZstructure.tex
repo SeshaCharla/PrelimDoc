@@ -1,0 +1,40 @@
+\itbf{Pole-Zero Cancellation:} Symbolic computations reveal that $s + g_4$ is
+the common factor among all the numerator polynomials and the denominator. This
+gets cancelled, removing all the direct effects of urea-dosing dynamics on
+$\delta x_1, \delta x_2$ from temperature and $NO_x$ inputs. The flow rate
+interacts with the urea-dosing dynamics as it affects the urea decomposition rate.
+
+From previous calculations, we can arrive at a general structure for the
+transfer function matrices. Let $^{(i)}$ denote the polynomial order of the
+expression in $'s'$ (Laplace variable).
+
+Thus,
+\begin{align} \label{eqn::I2S_tf}
+    G &= \bm{\frac{N_{11}^{(2)}}{D^{(3)}} &
+             \frac{N_{12}^{(0)}}{\lrb{(s+g_4) D^{(3)}}} &
+             \frac{N_{13}^{(2)}}{D^{(3)}} &
+             \frac{N_{14}^{(3)}}{\lrb{(s+g_4)D^{(3)}}}
+             \\
+             \frac{N_{21}^{(0)}}{D^{(3)}} &
+             \frac{N_{22}^{(2)}}{\lrb{(s+g_4)D^{(3)}}} &
+             \frac{N_{23}^{(2)}}{D^{(3)}} &
+             \frac{N_{24}^{(3)}}{\lrb{(s+g_4) D^{(3)}}}
+    }
+\end{align}
+
+The above model structure information can be used to identify the transfer
+function model for the linearized system. The transfer function model can be
+converted into regression form and least-squares optimization can be used to
+identify the model parameters. The regression form of the model would be:
+
+\begin{align} \label{eqn::I2S_regression_form}
+    \bm{\frac{d^4 x_1}{dt^4}\\
+        \frac{d^4 x_2}{dt^4}}
+    &= \bm{\pmb \phi_D(x_1)
+            & \pmb \phi_{N_1}
+            & \pmb 0\\
+            \pmb \phi_D(x_2)
+            & \pmb 0
+            & \pmb \phi_{N_2}}
+        \bm{\pmb \theta_D \\ \pmb \theta_{N_1} \\ \pmb \theta_{N_2}}
+\end{align}

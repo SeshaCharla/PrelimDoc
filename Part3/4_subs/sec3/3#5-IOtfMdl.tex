@@ -1,0 +1,13 @@
+\subsection{Input-Output Transfer Function Model}
+The input-output transfer function model for the linearized system can be
+derived from the input-to-state transfer function (\ref{eqn::I2S_tf}) model
+using the output equation~(\ref{eqn::lin_out})
+\begin{align}
+    G_y &= \frac{1}{D} \bm{N_1 + \chi N_2}  \label{eqn::I2O_tf}
+\end{align}
+
+The above transfer function model will have a regression form similiar to
+eqation~(\ref{eqn::I2S_regression_form}) with the following structure:
+\begin{align} \label{eqn::I2O_regression_form}
+    \frac{d^4 y_1}{dt^4} &= \bm{\pmb \phi_D(y_1) & \pmb \phi_{N_y}} \bm{\pmb \theta_D \\ \pmb \theta_{N_y}}
+\end{align}

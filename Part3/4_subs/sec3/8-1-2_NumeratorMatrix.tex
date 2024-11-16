@@ -1,0 +1,34 @@
+% \subsubsection{Numerator Matrix}
+We have the numerator matrix of the transfer function matrix:
+\begin{align*}
+    N &= \bm{N_1 \\ N_2} = \bm{N_{11} & N_{12} & N_{13} & N_{14}\\
+             N_{21} & N_{22} & N_{23} & N_{24}} = M B
+\end{align*}
+
+Where, $M$ is the first two rows of the adjoint matrix of $sI-A$. Calculating
+the expressions for each of the elements of $N$ matrix symbolically:
+
+\begin{minipage}{0.49\textwidth}
+ \begin{align*}
+    N_{11} &= (s + g_4)(n_{11_2} s^2 + n_{11_1} s + n_{11_0})\\
+    %===
+    N_{12} &= \bar b_{42} \bar f_{13} \bar f_{24} \bar x_{1} \left(\bar f_{32} \bar x_{3} - \bar g_{32}\right) \\
+    &= \frac{\Theta \bar k_{1} \bar k_{4F} \bar x_{1} \omega_{u} b_{u} \left(- V + \bar x_{3}\right)}{V}\\
+    %===
+    N_{13} &= (s + g_4)(n_{13_2} s^2 + n_{13_1} s + n_{13_0})\\
+    %===
+    N_{14} &= n_{14_3} s^3 + n_{14_2} s^2 + n_{14_1} s + n_{14_0}\\
+ \end{align*}
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
+ \begin{align*}
+    %===
+    N_{21} &= - \bar b_{11} \bar f_{31} \bar x_{3} \left(g_{4} + s\right) \left(\bar f_{23} \bar x_{2} + \bar g_{23}\right) \\
+    %===
+    N_{22} &= n_{22_2} s^2 + n_{22_1} s + n_{22_0}\\
+    %===
+    N_{23} &= (s + g_4)(n_{23_2} s^2 + n_{23_1} s + n_{23_0})\\
+    %===
+    N_{24} &= n_{14_3} s^3 + n_{14_2} s^2 + n_{14_1} s + n_{14_0}\\
+\end{align*}
+\end{minipage}
