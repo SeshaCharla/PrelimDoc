@@ -1,0 +1,82 @@
+\graphicspath{{Appendices/apx1_signal_est}}
+\subsection{Power Spectral Density of Individual Test Signals}
+
+\begin{multicols}{2}
+       \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.48\textwidth]{./figs/bfr_smth/test_psd/x1.png}
+        \caption{PSD of $[NO_x]^{out}$ FTIR signal}
+       \end{figure}
+
+       \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.48\textwidth]{./figs/bfr_smth/test_psd/x2.png}
+        \caption{PSD of $[NH_3]^{out}$ FTIR signal}
+       \end{figure}
+\end{multicols}
+\begin{multicols}{2}
+       \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.48\textwidth]{./figs/bfr_smth/test_psd/u1.png}
+        \caption{PSD of $[NO_x]^{in}$ }
+       \end{figure}
+
+       \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.48\textwidth]{./figs/bfr_smth/test_psd/u2.png}
+        \caption{PSD of urea injection rate}
+       \end{figure}
+\end{multicols}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\textwidth]{./figs/bfr_smth/test_psd/y1.png}
+\caption{PSD of $[NO_x]^{out}$ measurement signal}
+\end{figure}
+
+\begin{multicols}{2}
+       \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.48\textwidth]{./figs/bfr_smth/test_psd/T.png}
+        \caption{PSD of temperature}
+       \end{figure}
+
+       \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.48\textwidth]{./figs/bfr_smth/test_psd/F.png}
+        \caption{PSD of mass flow rate}
+       \end{figure}
+\end{multicols}
+
+% ============================================================================
+
+\subsubsection{Forgetting factor for RLS}
+
+The PSD plots show that much of the energy for the signals in within the frequency range of $0 \, Hz$ to $0.1 \, Hz$. Thus, the forgetting factor for the RLS algorithm is chosen such that the equivalent time-constant is greater than $1/1 = 10 \, s$. We have,
+
+\begin{align*}
+        T_f &= \frac{t_d}{1 - \lambda}\\
+        T_f = 10 \quad &\text{ and } \quad t_d = 0.2\\
+        \implies \lambda &= 1 - \frac{t_d}{T_f} = 1 - \frac{0.2}{10} = 0.98
+\end{align*}
+
+
+% ============================================================================
+
+\subsubsection{$h$ and $\nu$ parameters for individual signals}
+
+\begin{table}[H]
+        \centering
+       \begin{tabular}{c c c}
+              \hline \hline
+              \itbf{signal}& $h$    & $\nu$   \\ \hline \hline
+              $x_1$        & $1$    & $0.5$   \\
+              $x_2$        & $0.04$ & $0.04$  \\
+              $u_1$        & $1$    & $0.5$   \\
+              $u_2$        & $0.2$  & $0.1$   \\
+              $T$          & $40$   & $30$    \\
+              $F$          & $50$   & $20$    \\
+              $y_1$        & $1$    & $0.5$   \\ \hline \hline
+       \end{tabular}
+\caption{Values of threshold ($h$)  and bias ($\nu$) for individual test data signals}
+\end{table}

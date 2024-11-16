@@ -22,13 +22,15 @@
 % Set up the latex document w/ imports, definitions, and
 % template customizations
 \input{a-template/te0-template.tex}
-
 % TODO: not sure if everything should use \input
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ducument
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\bibliography{Part3/scr_refs}
+\input{ltx_core/ltx_pkgs.tex}
+\input{ltx_core/lst_style.tex}
+\input{ltx_core/new_cmds.tex}
+\bibliography{Part3/scr_refs, Part2/dron_refs, Part1/theory_refs}
 
 \begin{document}
 \maketitle
@@ -38,27 +40,16 @@
 
 % Input all chapters here
 \part{Theory: System Identification, Change Detection and Desired Compensation Adaptive Robust Control}
-\chapter{Introduction}
-\chapter{System Identification}
-\chapter{Set Memebership Identification}
-\chapter{Change Detection}
-\chapter{Desired Compensation Adaptive Robust Control}
-
+% \input{Part1/Part1.tex}
+%%=====
 \part{Static Hover and Hover Transition Control of a Tilted-winged Hexrotor under actuator faults}
-% (Dexterous Hexrotor)
-\chapter{Introduction}
-% Survey of static hover, multirotor control and relevant topics}
-\chapter{Actuator level control and monitoring using RPM feedback}
-\chapter{Dynamic Model with propeller rotational dynamics}
-\chapter{Trajectory generation and control}
-\chapter{Demonstration of Static Hover}
-
+% \input{Part2/Part2.tex}
+%===
 \part{Catalyst degradation (aging) detection and monitoring in diesel engine SCR-ASC systems}
 \input{Part3/Part3.tex}
 
-
 % Appendices
-\input{ch8-appendices/ap0-appendices.tex}
+\input{Appendices/ap0-appendices.tex}
 
 % Back content (vita, bib settings, etc.)
 \input{d-back/bk0-end.tex}
