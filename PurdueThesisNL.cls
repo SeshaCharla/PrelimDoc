@@ -617,6 +617,8 @@
           % ------------ END: UNOFFICIAL .CLS CHANGES ------------
 
           \addbibresource{Part3/scr_refs.bib}
+          \addbibresource{Part1/theory_refs.bib}
+          \addbibresource{Part2/drone_refs.bib}
           % See
           % https://tex.stackexchange.com/questions/134191/line-breaks-of-long-urls-in-biblatex-bibliography
           \setcounter{biburllcpenalty}{7000}
