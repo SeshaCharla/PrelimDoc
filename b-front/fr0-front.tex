@@ -6,10 +6,11 @@
     \input{b-front/fr3-acknowledgments.tex}
     \input{b-front/fr4-preface.tex}
     %
+    \setcounter{tocdepth}{1}
     \pdfbookmark{TABLE OF CONTENTS}{Contents}
     \tableofcontents
     \listoftables
-    \listoffigures
+    %\listoffigures
 }
 
 % Optional: Symbols, Abbreviations, Nomenclature, Glossary
@@ -18,5 +19,5 @@
 \input{b-front/fr5-abstract.tex}
 
 % For the official template
-% \setcounter{tocdepth}{3} % Might need this for the official template?
-\ifthen{\equal{\ZZbuildmode}{final}}{\setcounter{tocdepth}{3}}
+\setcounter{tocdepth}{1} % Might need this for the official template?
+\ifthen{\equal{\ZZbuildmode}{final}}{\setcounter{tocdepth}{1}}

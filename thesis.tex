@@ -34,24 +34,23 @@
 
 \begin{document}
 \maketitle
+\input{b-front/fr0-front.tex}  % Front matter (title, acknowledgements, abstract, etc)
+%%======================================================================================================================
 
-% Front matter (title, acknowledgements, abstract, etc)
-\input{b-front/fr0-front.tex}
+\part{\large Theory: System Identification, Change Detection and Desired Compensation Adaptive Robust Control}
+%\input{Part1/Part1.tex}
+%%======================================================================================================================
 
-% Input all chapters here
-\part{Theory: System Identification, Change Detection and Desired Compensation Adaptive Robust Control}
-% \input{Part1/Part1.tex}
-%%=====
-\part{Static Hover and Hover Transition Control of a Tilted-winged Hexrotor under actuator faults}
+\part{\large Static Hover and Hover Transition Control of a Tilted-winged Hexrotor under actuator faults}
 % \input{Part2/Part2.tex}
-%===
-\part{Catalyst degradation (aging) detection and monitoring in diesel engine SCR-ASC systems}
+%%======================================================================================================================
+
+\part{\large Catalyst degradation (aging) detection and monitoring in diesel engine SCR-ASC systems}
 \input{Part3/Part3.tex}
+%%======================================================================================================================
 
-% Appendices
-\input{Appendices/ap0-appendices.tex}
-
-% Back content (vita, bib settings, etc.)
-\input{d-back/bk0-end.tex}
-
+%%======================================================================================================================
+%% End Stuff
+% \input{Appendices/ap0-appendices.tex}   % Appendices
+\input{d-back/bk0-end.tex}              % Back content (vita, bib settings, etc.)
 \end{document}
