@@ -2,7 +2,7 @@
 Incorporating the input definition (\ref{eqn::input_def}) into the BLDC motor with the propeller model (\ref{eqn:dyn_mdl}), we have:
 %===
 \begin{equation}
-    J \dot \omega + b_m \omega + C_D \omega^2 + M_f \lr{1 - \frac{V_{in}}{\hat V_{in}}} =& V_{in} b_m u_\omega
+    J \dot \omega + b_m \omega + C_D \omega^2 + M_f \lr{1 - \frac{V_{in}}{\hat V_{in}}} = V_{in} b_m u_\omega
             + V_{in} \hat V_{in} C_D u_\omega^2
 \end{equation}
 %===
@@ -16,7 +16,7 @@ We assume that the battery voltage remains approximately constant with small var
 %====
 This leads us to the following nonlinear input-output model with uncertainties:
 \begin{equation}\label{eqn::nl_model}
-        J \dot \omega + b_m \omega + C_D \omega^2 + M_f \delta v =& V_{in} b_m u_\omega
+        J \dot \omega + b_m \omega + C_D \omega^2 + M_f \delta v = V_{in} b_m u_\omega
                 + V_{in}^2 (1 + \delta v) C_D u_\omega^2
 \end{equation}
 %===============================================================================
