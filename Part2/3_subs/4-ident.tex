@@ -1,0 +1,33 @@
+The model parameters and their variances are estimated using a combination of static experimental data and dynamic responses obtained under small-perturbation conditions. Subsequently, the resulting model is validated against the dynamic response of the full nonlinear model.
+
+\subsection{Aerodynamic coefficients and friction}
+Aerodynamic coefficients and friction parameters are accurately estimated
+through a least-squares estimation approach, as depicted in Fig.-\ref{fig::CT}
+and Fig.-\ref{fig::CD}. The experimental setup, shown in
+Fig.-\ref{fig::expt_setup}, records the total moment at the base, which
+encompasses both aerodynamic moments and BLDC motor friction. It's worth noting
+that the moment data exhibits greater variability than the model due to
+unmodeled aerodynamic effects, such as aerodynamic flutter.
+%===
+\begin{multicols}{2}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.49\textwidth]{Part2/figs/3_figs/aero/Thrust_curve.png}
+\caption{$C_T$ estimation}
+\label{fig::CT}
+\end{figure}
+%===
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.49\textwidth]{Part2/figs/3_figs/aero/Drag_curve.png}
+    \caption{$C_D$ estimation}
+    \label{fig::CD}
+\end{figure}
+\end{multicols}
+%===
+\subsection{Linearized model identification and parameter estimation}
+\input{Part2/3_subs/4B-lin_mod_ident.tex}
+%===
+\subsection{Validation}
+\input{Part2/3_subs/4C-validation.tex}
+%===
