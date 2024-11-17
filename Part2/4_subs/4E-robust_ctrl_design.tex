@@ -1,0 +1,44 @@
+\subsection{Robust feedback control design}
+
+
+Adding model uncertainties to the error dynamics (\ref{eqn::error_feedback_dyn}):
+\begin{align}
+    \dot z + bk z &=  \tilde \phi^T \theta + bu_{s2} - \lrb{ \phi_{du}^T \tilde \theta_b - d}
+    \label{eqn::error_feedback_dyn_uncertain}
+\end{align}
+
+The left side of (\ref{eqn::error_feedback_dyn_uncertain}) represents the
+stable nominal closed-loop dynamics. The terms in the brackets of the right-hand side represents the effect of all model uncertainties. Though these terms
+are unknown, but they are bounded above with some known function h(x, t). The
+goal of the robust feedback is to account for the uncertainties during the
+transients and the steady state of parameter adaptation. Thus, $u_{s2}$ is
+synthesized to satisfy the following two conditions:
+\begin{align}
+    C2:& \qquad z \lrb{-\phi_{du}^T \tilde \theta_b + d + b u_{s2}} \leq \varepsilon \\
+    C3:& \qquad z b u_{s2} \leq 0
+\end{align}
+%===============================================================================
+The function $h(x, t)$ is calculated as follows:
+\begin{align}
+    \abs{\phi_{du}^T \tilde \theta_b - d} &\leq h \implies h(x_d, t) = \abs{\phi_{du}^T(x_d, t)}  \tilde \theta_{bM} + 2 d_M
+    \label{eqn::h_bound}
+\end{align}
+The robust feedback control input $u_{s2}$ is thus designed to satisfy the conditions $C2$ and $C3$ as follows:
+\begin{align}
+    u_{s_2} &= -\frac{1}{\hat b_{min}} S(h \sign(z)) \label{eqn::robust_u}\\
+    %===
+    S(h \sign(z)) &= h \sat \lr{ \frac{h}{4 \varepsilon} z} \quad [\text{Smoothing function}]\\
+    %===
+    \sat (x) &= \begin{cases}
+        x  & \text{if  } \abs{x} \leq   1\\
+        \sign(x) &  \text{otherwise}
+    \end{cases}
+\end{align}
+The above defined smoothing function, $S(.)$, has the following properties:
+\begin{align}
+    P3: & \quad z S(h \sign(z)) = z h \sat \lr{\frac{h}{4 \varepsilon} z} \geq 0\\
+    P4: & \quad z \left[h \sign(z) - S(h\sign(z)) \right] \text{  is bounded.}
+\end{align}
+
+The robust control input definition (\ref{eqn::robust_u}) satisfies the
+conditions $C2$ and $C3$ as long as $P3, P4$ are valid (\cite{yao1998desired}).

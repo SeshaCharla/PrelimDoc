@@ -1,0 +1,43 @@
+Defining input to the system (u) as:
+\begin{align}
+    u &= \underbrace{\frac{1}{\hat J}\lr{\hat b_m u_\omega + \hat V_{in} \hat C_D u_\omega ^2}}_{g_u(u_\omega)} = \frac{K_r}{J} u_m  \label{eqn::ctrl_u}
+\end{align}
+Where $\hat \bullet$ are the estimated values of the parameters at the time of
+calibration. Note that $\hat J$ is included in order to get the input into
+appropriate scale.
+
+Thus, $u$ is the actual PWM input to the inverter scaled by the ratio of the
+torque constant and the winding resistance of the motor $\lr{\because K_r =
+\frac{K_T}{R}}$.
+
+Introducing the input definition (\ref{eqn::ctrl_u}) in to the nonlinear model
+of the system (\ref{eqn::dyn_mdl}):
+\begin{align*}
+    \implies \dot \omega  &= -\frac{b_m}{J} \omega - \frac{C_D}{J} \omega^2 - \frac{M_f}{J} + V_{in} u
+\end{align*}
+Introducing the input and modelling uncertainties as $\Delta(u, \omega, t)$ (matched). Let,
+$\bullet_{_J} = \frac{\bullet}{J}$. We have the control form of the model:
+\begin{align}
+   \dot \omega &= -b_{m_J} \omega - C_{D_J} \omega^2 - M_{f_J} + V_{in} u + \Delta(t, u, \omega) \label{eqn::ctrl_form}
+\end{align}
+The uncertainties in the input arise from the changes in the voltage from
+calibration and the real system, the uncertainties in the parameter estimation
+and higher-order input dynamics if any.
+
+The control input calculated from the algorithm is not the actual hardware
+input rather a nonlinear injective function of the hardware input. The
+uniqueness in the mapping comes from the constraints in the range of input
+values $(u > 0)$. From (\ref{eqn::ctrl_u}):
+\begin{align*}
+    &\hat V_{in} \hat C_D u_{\omega}^2 + \hat b_m u_\omega - \hat J u = 0\\
+    %===
+    \implies& u^{\pm}_\omega = \frac{-\hat b_m \pm \sqrt{\hat b_m ^2 + 4u \hat V_{in} \hat J \hat C_D}}{2 \hat V_{in} C_D}
+    %===
+\end{align*}
+%===============================================================================
+$\because \hat b_m, \hat C_D, \hat V_{in}, \hat J > 0 $ and $u_\omega > 0$ we have a unique mapping from $u$ to $u_w$:
+\begin{align}
+    u_\omega &= \underbrace{\frac{-\hat b_m + \sqrt{\hat b_m ^2 + 4u \hat V_{in} \hat J \hat C_D}}{2 \hat V_{in} \hat C_D}}_{g_u^+(u)}
+    \label{eqn::u2uw}\\
+    \implies u_p &= \frac{1}{a} \lr{g_u^+(u) - b} \qquad [\because u_\omega = a u_p + b \quad (\ref{eqn::uw_calib})]
+\end{align}

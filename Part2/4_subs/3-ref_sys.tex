@@ -1,0 +1,100 @@
+\section{Actuation limits and the reference system design}
+The actuator has hard limits beyond which the system doesn't function and
+operational limits beyond which the system doesn't produce useful output. These are tabulated in Table~\ref{tab::actuator_limits}.
+\begin{table}[h]
+    \caption{Input and steady state output limits}
+    \begin{center}
+    \begin{tabular}{l r r r r}
+        \hline \hline
+        Limit & $u_p \,^*$ & $u_{\omega}$ & $u$ & $\omega$ \\ \hline
+        Actual Lower         & 924  & 0     & 0        & 0\\
+        Lower Start          & 1110 & 12.93 & 29.08    & 200.92 \\
+        Operational Lower    & 1294 & 25.74 & 115.26   & 400 \\
+        Operational Higher   & 1849 & 64.35 & 720.35   & 1000\\
+        Actual Higher $(u_{\max})$& 1890 & 67.23 & 786.27   &  1044.56\\
+        \hline \hline
+    \end{tabular}
+    \label{tab::actuator_limits}
+    \end{center}
+    $^*$PWM input in $\mu s$ at $400 \, Hz$ base frequency.
+\end{table}
+% ==============================================================================
+
+The goal of feedback control design for the actuator is twofold:
+(1) To compensate for input uncertainties, unmodeled disturbances, and model structure errors.
+(2) To make the actuator track the response of a linear system (preferably a transfer function with no overshoot) within the operational limits. This ensures that the actuator achieves the maximum possible bandwidth in the presence of the mentioned uncertainties. Such a transfer function can be used as the actuator model for the drone control system design. Let the reference system be:
+\begin{align*}
+    G_{r}(s) &= \frac{\omega_{r}^2}{s^2 + 2s \zeta \omega_{r} + \omega_{r}^2}
+    && \zeta = \frac{1}{\sqrt{2}} = 0.707
+\end{align*}
+The above reference system will also introduce a limit on the maximum rate of
+change of angular velocity. By finding the peak magnitude of $s G_r(s)$, we have,
+\begin{equation}
+    \alpha(s) = s \omega(s) \;
+    \implies \dot \omega_{\max} = \max \lr{\alpha(j \omega)}= \frac{1}{\sqrt{2}} \omega_r
+\label{eqn::max_bandwidth}
+\end{equation}
+% ==============================================================================
+% ==============================================================================
+The input saturation imposes limitations on the maximum and minimum rate of
+change of the angular velocity $(\omega)$. The primary goal of the reference
+system design is to ensure that the input doesn't get saturated due to the
+model compensation input $u_m$ (\ref{eqn::model_comp_input}). Let,
+$u_{r}$ be the maximum available input for model compensation. This can be
+calculated by maximum robust control input $(u_{s2})$ and the maximum
+stabilizing feedback control input $(u_{s1})$.
+\begin{align}
+    u_{r} &= u_{\max} - \max {\lrf{u_{s1} + u_{s2}}}
+\end{align}
+$u_r$ can be calculated by finding the maximum value of $u_{s1}$ and $u_{s2}$
+based on the equations (\ref{eqn::u_s1_def}, \ref{eqn::k_bound}) and
+(\ref{eqn::robust_u}, \ref{eqn::h_bound}) respectively. The approximate upper
+bound of $u_r$ is calculated to be $\leq 526.2$.
+
+Thus, from the dynamic model (\ref{eqn::ctrl_form}), using the nominal parameter
+values and removing the uncertainties and $u_r$, we have the
+following bounds on the rate of change of the angular velocity within the
+operational limits:
+% ==============================================================================
+\begin{enumerate}
+    \item Maximum rate of increase:
+        $\dot \omega^{+}_{max} = 10020.12 \; rad/s$
+    \item Minimum rate of increase:
+    $\dot \omega^{+}_{min} = 616.95 \; rad/s$
+    \item Maximum rate of decrease:
+        $\dot \omega^{-}_{max} = -11601.68 \; rad/s$
+    \item Minimum rate of decrease:
+        $\dot \omega^{-}_{min} = -2198.51 \; rad/s$
+\end{enumerate}
+% ==============================================================================
+In order for the motor-propeller system to accurately track the response of a linear second-order system within the given input constraints, the maximum rate of change of the reference system state should be lower than the minimum rate of change in the actual system. This ensures that the system can keep up with the desired changes in the reference signal.
+\begin{align}
+    \abs{\dot \omega_{max}} &< \abs{\dot \omega^{+}_{min}} \quad
+    \implies \omega_r <  872.5 \; rad/s
+    \label{eqn::omega_r_lim}
+\end{align}
+% ==============================================================================
+% ==============================================================================
+The sampling due to the implementation of feedback would introduce its own
+limitations on the maximum bandwidth of the reference system, namely, the
+Nyquist frequency $(n_f = 125\,Hz)$ of sampling. The approximate inequality would be:
+\begin{align}
+    \omega_r < 2 \pi n_f = 785.4 \; rad/s
+    \label{eqn::wr_lim_nf}
+\end{align}
+The above inequality (\ref{eqn::wr_lim_nf}), can be
+flipped and combined with (\ref{eqn::omega_r_lim}) for using it as a design
+limitation for the sampling system. Thus, the minimum sampling the requirement
+for obtaining the maximum performance from the system as $2 \pi n_f > {\abs{\dot \omega^{\pm}_{min}}}$.
+% ==============================================================================
+% ==============================================================================
+
+From the above inequalities on $\omega_r$, (\ref{eqn::wr_lim_nf}),
+(\ref{eqn::omega_r_lim}), a conservative choice or $\omega_r$ as $200 \, rad/s$ is
+chosen with $\zeta = {1}/{\sqrt{2}}$. The reason for choosing a lower value
+is to have enough margins in inputs for the actual system to track the reference
+system. Further gain optimizations through design iterations would lead to a
+value close to its limits.
+
+The reference system is discretized using the 'c2d' function in MATLAB using
+zero-order-hold approach with a sampling frequency of $250 \; Hz$.

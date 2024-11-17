@@ -1,0 +1,42 @@
+\subsection{Proof of stability and tracking performance when $d = 0$ \label{apx::dzero_stability}}
+
+When $d = 0$ consider the following Lyapunov function:
+\begin{align*}
+    V &= \frac{1}{2} z^2 + \frac{1}{2} \tilde{\theta}_b^T \Gamma^{-1} \tilde{\theta}_b\\
+    %===
+    \implies \dot V &= z \dot z + \tilde \theta_b^T \Gamma^{-1} \dot{\hat \theta}_b\\
+    %===
+    &= z \lr{- bk z +  \tilde \phi^T \theta - \phi_{du}^T \tilde \theta_b}+ \tilde \theta_b^T \Gamma^{-1} \dot{\hat \theta}_b\\
+    %===
+    &\leq -bkz^2 + \delta_\phi z^2 - \tilde \theta_b^T \phi_{du} z + \tilde \theta_b^T \Gamma^{-1} \lr{\Gamma \phi_{du} z}\\
+    %===
+    &\leq z^2 \lr{-bk + \delta_\phi} < 0 \qquad \lrb{\because (\ref{eqn::k_bound})}\\
+    \implies \dot V &< 0
+\end{align*}
+Thus,
+\begin{itemize}
+    \item $\dot V$ is negative semi-definite.
+    \item $V$ has a lower bound $ \lrb{\because \geq 0}$.
+\item $\dot V$ is uniform continuous $\lrb{\because \ddot V \leq \lr{-bk +
+\delta_\phi}z \dot z }$.
+    \item $\therefore$ For a bounded $x_d$, $z \in L_\infty$, $\tilde{
+    \theta}_b \in L_{\infty}$ and $\dot z \in L_\infty$, $\ddot V \in L_\infty$.
+\end{itemize}
+
+Hence, the parameter estimates and tracking errors are bounded, and the system
+is stable.
+
+Also, since $V$ is non-decreasing and positive definite,
+\begin{align*}
+    &V(0) - V(t) \leq V(0) \:
+    \implies -\int_0^t V d \tau \leq V(0)\\
+    &\implies \int_0^t \lr{-bk + \delta_\phi} z^2 d \tau \leq V(0)\\
+    &\implies \sqrt{\int_0^t \norm{z}^2 d \tau } \leq \sqrt{\frac{2 V(0)}{\lr{-bk + \delta_\phi}}} \leq \infty\\
+    \therefore z &\in L_2
+\end{align*}
+From Barbalat's lemma, we have,
+\begin{align*}
+    \dot V \rightarrow 0 \quad z \rightarrow 0 \quad \text{as} \quad t \rightarrow 0
+\end{align*}
+Thus the parameter estimates are bounded, and the tracking error asymptotically
+goes to zero as  $t \rightarrow 0$.

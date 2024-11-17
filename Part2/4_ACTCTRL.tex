@@ -1,1 +1,54 @@
 \chapter{DCARC Control of the Actuator}
+%===
+Adaptive robust control (ARC) combines the asymptotic performance from parameter adaptation of adaptive control (MRAC)
+with the transient performance of the nonlinear robust control techniques such as sliding mode
+control(\cite{yao1997adaptive}, \cite{yao2010advanced}). This is primarily achieved by decoupling the stability of the
+system from the adaptation law using projection to limit the domain of adaptation. Then a robust control law is
+independently designed to ensure the transient performance across the entire domain of parameter values.
+
+The projection operator also gives an added advantage of using non-gradient type adaptation laws like recursive least
+squares (RLS) resulting in a faster parameter convergence (\cite{yao2003integrated}). Similarly, we can reduce the
+effect of sensor noise on the adaptation and model compensation by designing the regression vectors for the parameter
+estimation and model compensation solely based on the reference instead of the state measurements
+(\cite{yao1998desired}, \cite{lu2008desired},\cite{hong2007globally}). This is particularly useful in the present
+scenario where the RPM measurements are prone to significant noise. The stability is ensured by having additional
+conditions on the stabilizing feedback. Such a design can also be used in the presence of actuator saturation.
+
+The current study adopts the design and method of proof proposed in \cite{yao1998desired} for a first order nonlinear
+system with friction and disturbance. The input saturation is implicitly considered in the reference system design,
+filtering out the high-frequency components of the reference signal that can cause the actuator saturation due to model
+compensation input. Additionally, the effects of saturation due to robust and stabilizing feedback can be explicitly
+considered as in \cite{hong2007globally}.
+
+
+\section{Control form and parameter bounds for the model}
+From the experiments the system starts only at $u_\omega = 12.93$ which
+is the minimum input required to overcome the static friction. This can be
+verified as:
+\begin{align}
+     \lr{V_{in}^2  C_D u_\omega^2 }_{\lr{u_\omega = 12.93, V_{in} = 15.54}} = 1.4570 =  M_f \lr{\frac{V_{in}}{\hat V_{in}}}
+\end{align}
+
+Thus, expanding the range of $u_w$ from $[12.93, 67.23]$ to $[0, 67.23]$, the
+dynamic model will now include the actual friction instead
+of $M_f \lr{1 - \frac{V_{in}}{\hat V_{in}}}$. Rewriting equation~(\ref{eqn::nl_model}):
+
+\begin{align}
+    &J \dot \omega + b_m \omega + C_D \omega^2 + M_f = V_{in} \lr{b_m u_\omega + \hat V_{in} C_D u_\omega^2}
+    \label{eqn::0_mdl}
+\end{align}
+
+\input{Part2/4_subs/2E-CtrlForm.tex}
+\input{Part2/4_subs/4B-ctrl_form.tex}
+%=======================================================================================================================
+\input{Part2/4_subs/3-ref_sys.tex}
+%=======================================================================================================================
+\section{DCARC Design}
+\input{Part2/4_subs/4C-des_mod_comp.tex}
+\input{Part2/4_subs/4D-discont_adapt_law.tex}
+\input{Part2/4_subs/4D-dzero_stability.tex}
+\input{Part2/4_subs/4E-robust_ctrl_design.tex}
+\input{Part2/4_subs/4F-stability_proof.tex}
+\input{Part2/4_subs/4G-prm_sel_tuning.tex}
+%=======================================================================================================================
+\input{Part2/4_subs/5-Expt_results.tex}

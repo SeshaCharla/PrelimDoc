@@ -1,0 +1,66 @@
+Rewriting the (\ref{eqn::ctrl_form}) with the following definitions:
+\begin{align*}
+    &\Delta(t, x, u) = d_0 + d(t, x, u) \\
+    %===
+    & \theta_1 = C_{D_J}, \: \theta_2 = b_{m_J}, \: \theta_3 = M_{f_J} - d_0  \: \text{and,} \: b = V_{in}
+    %===
+\end{align*}
+\begin{align}
+    & \dot x = \underbrace{-\theta_1 x^2 -\theta_2 x - \theta_3}_{f(t, x)} + b u + d(t, x, u)
+    \label{eqn::prm_ctrl_form}
+\end{align}
+
+Defining the following regression and parameter vectors:
+\begin{align}
+    \phi(x) &= \bm{ -x^2 & -x & -1}^T \\
+    %===
+    \theta &= \bm{\theta_1 & \theta_2 & \theta_3}^T = \bm{C_{D_J} & b_{m_J} & M_{f_J}-d_0}^T
+    %===
+\end{align}
+The bounds on input
+uncertainties are calculated based on the maximum and minimum values of the
+parameter estimates at the calibration time (same as at realtime). From (\ref{eqn::ctrl_u}):
+\begin{align*}
+    \abs{\Delta}_{\max} &\leq \tilde \theta_{2M} \abs{u_\omega}_{\max} + \lr{\tilde b_M \abs{\theta_1}_{\max} + \abs{b}_{\max} \tilde \theta_{1M}}\abs{u_\omega}_{\max}^2  \\ &< 350 = d_M
+\end{align*}
+
+The Table~\ref{tab::parm_bounds} gives the minimum, maximum and nominal values
+of the parameters of the equation (\ref{eqn::prm_ctrl_form}) from experimental
+data:
+
+\begin{table}[h]
+    \caption{Summary of parameter bounds}
+    \centering
+    \begin{tabular}{r r r r}
+        \hline \hline
+        Parameter &Nominal & Minimum & Maximum \\ \hline
+        $\theta_1$            &
+        $0.0112$              &
+        $0.0101$              &
+        $0.0123$
+
+        \\
+        $\theta_2$               &
+        $0$                      &
+        $0$                      &
+        $1$
+        \\
+        $\theta_3$                 &
+        $407.44$                   &
+        $0$                        &
+        $750$
+        \\
+        $b$                        &
+        $15.54$                    &
+        $14.5$                     &
+        $16.5$
+        \\
+        $d(t)$                   &
+        $0$                      &
+        $-700$                   &
+        $700$
+        \\
+        \hline \hline
+    \end{tabular}
+    \label{tab::parm_bounds}
+\end{table}

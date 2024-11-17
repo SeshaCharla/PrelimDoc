@@ -1,0 +1,80 @@
+\subsection{Desired model compensation input}
+The role of model compensation is to generate the required input for the
+nominal plant state $(x)$ to track the desired trajectory $(x_d)$.
+Let,
+\begin{align}
+    z &= x - x_d\\
+    \implies \dot z &= \dot x - \dot x_d = \phi^T \theta +  bu + d - \dot x_d
+    \label{eqn::error_dyn}
+\end{align}
+
+Considering only the nominal dynamics, i.e., assuming zero uncertainties ($d = 0$), the error dynamics can be simplified as follows:
+\begin{align}
+    \dot z &= \phi^T \theta + bu - \dot x_d
+    \label{eqn::nom_error_dyn}
+\end{align}
+The total control input $u$ can be decomposed into $u_m$ (model compensation input) and $u_s$ (robust control input).
+\begin{align}
+    u &= u_m + u_s
+\end{align}
+The model compensation input in the present case is derived solely from the
+reference trajectory dynamics and the model parameters. We have,
+\begin{align}
+    u_m &= \frac{1}{\hat b} \lr{\dot x_d - \phi^T(x_d) \hat \theta}
+         = \frac{1}{\hat b} \lr{\dot x_d - \phi^T_d \hat \theta}
+         \quad \lrb{\phi_d  = \phi(x_d)}
+    \label{eqn::model_comp_input}
+\end{align}
+Substituting the above expression for $u_m$ in the nominal error dynamics
+(\ref{eqn::nom_error_dyn}), let $\tilde b = \hat b - b$, we get:
+\begin{align}
+    \dot z
+    &= \phi^T \theta - \phi^T_d \theta + \phi^T_d \theta - \phi^T_d \hat \theta + bu_s - \tilde b u_m
+\end{align}
+Let, $\tilde \phi = \phi(x) - \phi(x_d)$ and $\tilde \theta = \hat \theta -
+\theta$. The error dynamics can be rewritten as:
+\begin{align}
+    \dot z &= \tilde \phi^T \theta - \phi^T_d \tilde \theta + bu_s - \tilde b u_m \label{eqn::error_dyn_model_comp}
+\end{align}
+It can be noted that as $\theta$ is unknown with known bounds, there exists a
+known function $\delta_\phi(x, t)$ such that:
+\begin{align}
+    \abs{\tilde \phi^T \theta} &\leq \delta_\phi(x, t) \abs{z}
+    \label{eqn::tl_phi_bound}
+\end{align}
+
+
+Further, let: $\phi_{du}^T = \bm{\phi_d^T & u_m}$ and $\theta_{b} = \bm{\theta^T
+& b} \implies \tilde \theta_b = \bm{\tilde \theta^T & \tilde b}$
+Substituting the above definitions in (\ref{eqn::error_dyn_model_comp}), we get:
+\begin{align}
+    \dot z &= \tilde \phi^T \theta - \phi_{du}^T \tilde \theta_b + bu_s
+    \label{eqn::error_dyn_model_comp_2}
+\end{align}
+The robust feedback control input $u_s$ is further decomposed into two parts:
+\begin{align}
+    u_s &= u_{s1} + u_{s2}\\
+    u_{s1} &= - k z \label{eqn::u_s1_def}
+\end{align}
+Substituting above expression for $u_s$ in the error dynamics
+(\ref{eqn::error_dyn_model_comp_2}), we get:
+\begin{align}
+    \dot z + bk z &= \tilde \phi^T \theta - \phi_{du}^T \tilde \theta_b + bu_{s2}
+    \label{eqn::error_feedback_dyn}
+\end{align}
+The robust feedback control input $u_{s2}$ is designed to account for the model
+structure and input uncertainties (d) which are assumed to be zero in this
+design. Thus analyzing the error dynamics (\ref{eqn::error_feedback_dyn}) with
+$u_{s2} = 0$:
+\begin{align*}
+    \dot z + bk z &= \tilde \phi^T \theta - \phi_{du}^T \tilde \theta_b
+\end{align*}
+If $\tilde \theta_b$ asymptotically becomes zero, then the feedback gain of the
+error dynamics should be large enough to compensate for $\tilde \phi^T \theta$.
+From (\ref{eqn::tl_phi_bound}), we get the following condition for the zero
+tracking error when the parametric uncertainties are zero:
+\begin{align}
+    bkz &\geq \delta_\phi(x, t) \abs{z}\\
+    C1: \qquad \implies k &\geq \frac{1}{b}\delta_\phi(x, t) > \frac{1}{\hat b_{min}} \delta_\phi(x, t)
+    \label{eqn::k_bound}
+\end{align}

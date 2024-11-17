@@ -1,0 +1,19 @@
+%\subsection{Controller parameter selection and tuning}
+
+The controller parameters for the DCARC design are selected based on the
+conditions C1-C3. The controller parameters are given in Table~\ref{tab::ctrl_prm}.
+\begin{table}[H]
+    \caption{Parameters for the DCARC design}
+    \label{tab::ctrl_prm}
+    \centering
+    \begin{tabular}{c l}
+        \hline \hline
+        Parameter & Value \\
+        \hline
+        $k$ & $2.0$ \\
+        $h$ & $1000$ \\
+        $\varepsilon$ & $10$ \\
+        $\Gamma$ & $diag\lr{\mat{1.1e-10, & 5e-05,& 3.75,& 2e-04}}$\\
+        \hline\hline
+    \end{tabular}
+\end{table}

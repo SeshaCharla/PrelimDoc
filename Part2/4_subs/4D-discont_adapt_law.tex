@@ -1,0 +1,41 @@
+\subsection{Discontinuous projection based adaptation law}
+The parameter estimation error $\tilde \theta_b$ can be reduced to zero asymptotically by using a gradient-based parameter adaptation law. This adaptation law is defined as follows:
+\begin{align}
+    \dot{\hat{\theta_b}} &= Proj_{\hat{\theta_b}}\lr{\Gamma \phi_{du}(t) z}
+\end{align}
+Where $\Gamma$ is a positive definite, diagonal adaption rate matrix.
+We define, \itbf{Discontinuous projection mapping} $Proj()$ for a vector as follows:
+\begin{align}
+    &Proj_{\hat{\theta}} (\bullet) = \bm{Proj_{\hat \theta_1}(\bullet_1), &
+                                        \hdots, &
+                                        Proj_{\hat \theta_n}(\bullet_n)}
+\end{align}
+\begin{align}
+    &Proj_{\hat \theta_i}(\bullet_i)
+    = \begin{cases}
+        0 & \text{if } \begin{cases}
+                        \hat \theta_i &= \hat \theta_{i_{min}} \text{  and  } \bullet_i < 0\\
+                        \hat \theta_i &= \hat \theta_{i_{max}} \text{  and  } \bullet_i > 0\\
+                       \end{cases}\\
+        \bullet_i & \text{otherwise}
+    \end{cases}
+\end{align}
+The above mapping has the following properties:
+    \begin{align}
+        P1: & \: \hat{\pmb \theta} \in \bar \Omega_{\theta}=\{\hat{\pmb \theta} :
+        \theta_{i_{min}} \leq \hat \theta_i \leq \theta_{i_{max}} \; \forall
+        i\} \; \forall t\\
+        %===
+        P2: & \: \tilde{\pmb{\theta}} \left[ \Gamma^{-1} Proj_{\hat{\pmb\theta}}
+        \lr{\Gamma \pmb \phi z} - \phi z \right] \leq 0 \: \forall t \quad
+        [\tilde{\pmb{\theta}} = \hat{\pmb\theta} - \pmb \theta]
+    \end{align}
+
+The above adaptation law asymptotically reduces the errors due to parameter
+estimation to zero. This can be proved by adding the following positive
+definite term to the Lyapunov function, $\tilde \theta_b^T \Gamma^{-1} \tilde
+\theta_b$, as shown in \cite{yao1998desired}.
+%===============================================================================
+%===============================================================================
+
+%\input{secs/4D-dzero_stability.tex}

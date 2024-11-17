@@ -1,0 +1,25 @@
+\subsection{Proof of stability and tracking performance when $d \neq 0$}
+Consider the following Lyapunov function:
+\begin{align*}
+    V &= \frac{1}{2} z^2\\
+    \implies \dot V &= z \dot z = z \lr{-kbz + \tilde \phi^T \theta - \phi_{du}^T \tilde \theta_b + d + b u_{s2}}\\
+    %===
+    &= -(kb - \delta_{\phi})z^2 + z \lr{- \phi_{du}^T \tilde \theta_b + d + b u_{s2}}\\
+    &\leq -(kb - \delta_{\phi}) z^2 + \varepsilon \qquad [\because C3] \\
+    \implies \dot V &\leq -k_p z^2 + \varepsilon = - 2 k_p V + \varepsilon
+\end{align*}
+By applying comparison lemma, the upper bound can be found from the forced
+response of the following ODE:
+\begin{align*}
+    &\dot V + 2 k_p V = \varepsilon\\
+    &\implies sV - V(0) + 2 k_p V = \varepsilon\\
+    &\implies V = \frac{V(0)}{s + 2 k_p} + \frac{\varepsilon}{2 k_p}\\
+    &\implies V(t) = V(0)e^{2 k_p t} + \int_0^t{e^{2 k_p (t-\tau)} \varepsilon(\tau) d\tau}\\
+    &\implies \frac{1}{2} z^2 = \frac{1}{2} z(0)^2 e^{2 k_p t} + \int_0^t{e^{2 k_p (t-\tau)} \varepsilon(\tau) d\tau}\\
+    %===
+    &\implies \abs{z(t)}^2 = z(0)^2 e^{2 k_p t} +2 \int_0^t{e^{2 k_p (t-\tau)} \varepsilon(\tau) d\tau}\\
+    &\qquad \qquad \leq z(0)^2 e^{2 k_p t} + \frac{\varepsilon_M}{k_p} \left[1 -  e^{2 k_p t} \right]
+    %==
+\end{align*}
+This the system is stable, and the transient response is bounded that
+exponentially converges to $\frac{\varepsilon}{k_p}$.
