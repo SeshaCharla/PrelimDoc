@@ -1,0 +1,49 @@
+We have speed-torque characteristics of a BLDC motor \cite{crowder2019electric}:
+%===
+\begin{align}
+    T_e &= K_T I = K_T \frac{(V_s - E)}{R} = \frac{K_T}{R} (V_s - K_v \omega)
+\end{align}
+Where,
+\begin{align*}
+    \small
+    \omega &- \text{\small Mechanical RPM} & &
+    T_e      - \text{\small Electromagnetic torque}\\
+    E        &- \text{\small Back emf} & &
+    V_s      - \text{\small Supply voltage}\\
+    I        &- \text{\small DC current}& &
+    R        - \text{\small Terminal phase resistance}\\
+    K_T      &- \text{\small Motor torque constant} & &
+    K_v      - \text{\small Motor Kv value $(=K_T)$}
+\end{align*}
+%===
+Let, $K_r = \frac{K_T}{R}$.
+From (\ref{eqn::esc_input}), we have the electromagnetic torque as a function
+of input and rpm:
+\begin{align}\label{eqn::Te}
+    T_e &= u K_r V_{in} - K_r K_v \omega
+\end{align}
+%===
+We use the following quadratic relationship between propeller aerodynamic forces
+and RPM \cite{pounds2010modelling}:
+\begin{align}
+    &\text{Propeller Thrust:}\quad
+    F_T = C_{T} \omega^2\\
+    &\text{Propeller moment due to drag:}\quad
+    M_D = C_{D} \omega^2
+\end{align}
+%===
+In our system, with the motor operating in a single direction, we consider
+Coulomb friction as $M_f$ and damping due to viscous friction as $b_f\omega$.
+We have the dynamic model of the BLDC motor with propeller using moment balance:
+%===
+\begin{align}
+    J \dot \omega &= T_e - b_f \omega - M_f - C_D \omega^2
+\end{align}
+Where, $J$ is the moment of inertia. Also, let $b_m = b_f + K_rK_v$. We have the dynamic model:
+\begin{equation}\label{eqn:dyn_mdl}
+    J\dot \omega + b_m \omega + C_D \omega^2 + M_f = u K_r V_{in}
+\end{equation}
+%===
+\input{Part2/3_subs/3A-norm_omega.tex}
+\input{Part2/3_subs/3B-input_output.tex}
+\input{Part2/3_subs/3C-small_perturbation.tex}

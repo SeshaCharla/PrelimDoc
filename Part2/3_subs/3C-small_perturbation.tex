@@ -1,0 +1,22 @@
+% ==============================================================================
+\subsection{Small Perturbation Model}
+Utilizing small perturbations and neglecting the gain variation $(\delta v)$, we derive the linearized model, resulting in the transfer function:
+\begin{align}
+    \frac{\delta \omega(s)}{\delta u_\omega (s)} &= \frac{V_{in} b_m + 2V_{in}^2 C_D u_{\omega_0}}{Js + (b_m + 2 C_D \omega_0)}
+\end{align}
+Additionally, we establish the following relationship between the nominal input and outputs from the input definition:
+\begin{align}
+    \omega_0 &= V_{in} u_{\omega_0}
+    \implies \frac{\delta \omega(s)}{\delta u_\omega (s)} =\frac{V_{in} \lr{b_m + 2C_D \omega_0}}{Js + (b_m + 2 C_D \omega_0)}
+\end{align}
+Comparing with the standard first order model $\lr{\frac{K_m}{\tau_m s + 1}}$,
+we have:
+\begin{align}
+    K_m &= V_{in}, \qquad
+    \tau_m = \frac{J}{b_m + 2 C_D \omega_0}
+\end{align}
+\begin{align}
+    \implies \omega_m &= \frac{1}{J}\lr{b_m + 2 C_D \omega_0}
+\end{align}
+Hence, the cutoff frequency is directly proportional to the nominal rpm, and the
+static gain solely depends on the battery voltage.
