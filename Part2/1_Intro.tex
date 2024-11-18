@@ -6,7 +6,7 @@
 
 \begin{figure}[H]
         \centering
-        \includegraphics[width = 0.49\textwidth]{Part2/figs/drone.jpg}
+        \includegraphics[width = 0.49\textwidth]{Part2/figs/1_figs/drone.jpg}
         \caption{Tilted winged hexrotor (Dexterous Hexrotor)}
         \label{fig::drone}
 \end{figure}
@@ -21,4 +21,23 @@ comparable to that of the dynamics of the drone effecting the performance in app
 forces (\cite{hamandi2021design}). In fact, the survey of \cite{hamandi2021design} noted gaps in the literature coverage
 regarding theoretical analysis of actuation limits for multi-rotor UAVs.
 
-\par Several works propose actuator fault detection using the existing signals from the instrumentation such as
+\par The early research (2000s) in control of multirotors was primarily focused on stability and trajectory tracking in the under-actuated case. Such designs were proved to be not differentially flat but only the approximations \cite{Koo1998}. Thus, the tracking error is bounded but not asymptotically zero. The control structure primarily involves feedback linearization \cite{Mokhtari2004} or back-stepping designs \cite{Mistier2001} on transformed inputs to the system in the form of total wrench on the drone. The singularity associated with the euler angels has been overcome by using alternate parametrization for the attitude like quarternions \cite{Tayebi2006}, Lie Groups $SO(3)$ (3D rotation group)\cite{canYang} and Modified Rodrigues Parameters (MRPs) \cite{crassidis1996attitude}, etc. The primary sensor used for attitude feedback were accelerometers, gyroscopes collectively packaged as IMUs (Inertial Measurement Units) \cite{Martin2010}.
+
+\par On the multirotor design side, several new configurations were proposed (in 2010s) including designs with changing tilt and cant angels of the propellers. Studies have shown that introducing tilt and cant angles can make the multirotors robust to actuator faults \cite{Rajappa2015}. Such designs have also been used in the area of aerial manipulation (\cite{Tognon2019},\cite{Nava2020}, \cite{lulu1}, \cite{lulu2}) where the multirotors are used for generating contact forces in a particular direction.
+
+\par The actuator fault detection has been an important area of research in this space since the beginning \cite{6935563}. Most of the research was focused on indirectly estimating the thrust generated using observer designs such as nonlinear Thau observer \cite{hasan2018model}, etc. Other prominent method involves the use of the vibration signals due to propeller damage to detect the fault \cite{puchalski2022actuator}, \cite{thanaraj2023actuator}. These methods have proven adequate for detecting faults but lack the capacity of isolating the fault to on particular actuator.
+
+\par One area of development that garnered less attention is the effect of propeller angular momentum on the tracking
+performance in the case of fully actuated designs. The angular momentum introduces second order disturbance effects that
+are justifiably neglected in the planar configurations of early studies as the tracking error can only bounded in those cases (Differential Flatness). The latter designs with tilted rotors do not suffer the same. The importance of the propeller angular momentum in the case of large propellers is demonstrated in the next section.
+
+\par The tilted-rotor designs enable actuator redundancy which can be taken advantage of through static hover\cite{Bicego2020}. The study \cite{Michieletto2018} presents the class of designs which demonstrate such capabilities.
+
+\par The goal of the present work is three-fold:
+\begin{enumerate}
+        \item Develop actuator fault detection methodology using RPM feedback and set membership techniques and demonstrate using the experimental setup.
+        \item Use the propeller RPM feedback for compensating for the propeller's angular momentum in the unbalanced cases.
+        \item Develop control designs for static hover of the tilted-winged hexrotor (Dexterous Hexrotor) and demonstrate through simulation studies.
+\end{enumerate}
+
+\input{Part2/1_subs/2_prop_momentum.tex}

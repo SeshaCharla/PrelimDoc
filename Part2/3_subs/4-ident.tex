@@ -9,21 +9,25 @@ encompasses both aerodynamic moments and BLDC motor friction. It's worth noting
 that the moment data exhibits greater variability than the model due to
 unmodeled aerodynamic effects, such as aerodynamic flutter.
 %===
-\begin{multicols}{2}
+
+\begin{minipage}{0.49\textwidth}
 \begin{figure}[H]
     \centering
-    \includegraphics[width = 0.49\textwidth]{Part2/figs/3_figs/aero/Thrust_curve.png}
+    \includegraphics[width = \textwidth]{Part2/figs/3_figs/aero/Thrust_curve.png}
 \caption{$C_T$ estimation}
 \label{fig::CT}
 \end{figure}
+\end{minipage}
 %===
+\begin{minipage}{0.49\textwidth}
 \begin{figure}[H]
     \centering
-    \includegraphics[width = 0.49\textwidth]{Part2/figs/3_figs/aero/Drag_curve.png}
+    \includegraphics[width = \textwidth]{Part2/figs/3_figs/aero/Drag_curve.png}
     \caption{$C_D$ estimation}
     \label{fig::CD}
 \end{figure}
-\end{multicols}
+\end{minipage}
+
 %===
 \subsection{Linearized model identification and parameter estimation}
 \input{Part2/3_subs/4B-lin_mod_ident.tex}
