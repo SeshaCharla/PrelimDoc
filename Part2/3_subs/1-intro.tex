@@ -1,39 +1,13 @@
-\par The modeling of motor-propeller dynamics in the context of multi-rotor
-vehicles takes various forms, including treatment as input uncertainties \cite{liang2021geometric}, linear dynamics \cite{pounds2010modelling}, or stationary mappings \cite{tayebi2006attitude}. However, these models frequently oversimplify the polynomial nonlinearity inherent in actuator dynamics, which includes factors such as friction and aerodynamics.
-
-The rotational inertia and the substantial mass of large propeller blades
-introduces time-scales comparable to those of the overall drone dynamics. These
-dynamics play a pivotal role in achieving precise and controllable forces and
-maneuvers \cite{hamandi2021design}. Such precision and control are of
-paramount importance in the emerging field of aerial manipulation, where large
-multi-rotors with diverse configurations are employed \cite{ding2021design},
-\cite{ryll20176d}, \cite{jiang2017estimation}.
-
-While open-loop control simplifies actuator design, it has limited
-effectiveness in increasing bandwidth \cite{charla2022enhancing} and can
-amplify uncertainties. Therefore, feedback mechanisms, such as monitoring
-actuator inputs for calculating aerodynamic power \cite{B_Manony} or propeller
-RPM \cite{franchi2017adaptive}, \cite{bangura2017thrust}, become necessary.
-However, note that the former methods may suffer from calibration errors. The
-proliferation of commercially available BLDC RPM sensors, designed to transmit
-commutation signals, now enables reliable RPM measurements in medium-sized
-drones.
-
-The earlier studies that employed rotor RPM feedback to enhance system
-dynamics, such as
-\cite{pounds2009design},\cite{pounds2007system},\cite{mahony2012multirotor}
-relied on a second-order model around hover conditions. This approach, while
-effective for minor input variations, may not be suitable for accommodating
-substantial input changes. In contrast, \cite{franchi2017adaptive} implemented
-a hybrid controller using RPM feedback to linearize actuator dynamics. However,
-this method necessitates low-level access to the Electronic Speed Controller's
-(ESC's) microcontroller. A notable challenge when using commercial ESCs designed for manual control in autonomous operations
-is their thrust-to-input curve is linearized for intuitive
-operability. Usually, this is achieved by introducing nonlinear compensation in
-the speed controller of the ESC and the actual PWM input to the inverter
-controlling the BLDC motor (Fig.-\ref{fig::bldc_diag}). However, attempting to
-estimate this compensation through system identification techniques proved to
-be unfeasible.
+Previous studies that employed rotor RPM feedback to enhance system dynamics, such as
+\cite{pounds2009design},\cite{pounds2007system},\cite{mahony2012multirotor} relied on a second-order model around hover
+conditions. This approach, while effective for minor input variations, may not be suitable for accommodating substantial
+input changes. In contrast, \cite{franchi2017adaptive} implemented a hybrid controller using RPM feedback to linearize
+actuator dynamics. However, this method necessitates low-level access to the Electronic Speed Controller's (ESC's)
+microcontroller. A notable challenge when using commercial ESCs designed for manual control in autonomous operations is
+their thrust-to-input curve is linearized for intuitive operability. Usually, this is achieved by introducing nonlinear
+compensation in the speed controller of the ESC and the actual PWM input to the inverter controlling the BLDC motor
+(Fig.-\ref{fig::bldc_diag}). However, attempting to estimate this compensation through system identification techniques
+proved to be unfeasible.
 %===
 \begin{figure}[h]
     \centering
@@ -43,4 +17,7 @@ be unfeasible.
 \end{figure}
 %===
 
-The present work introduces an adaptable input definition ($u_\omega$) capable of accommodating any nonlinear compensatory mechanisms within the ESC that define ($u_p$). Utilizing this input definition, the nonlinear control model of the system is developed. This model enables the design of improved controllers capable of explicitly mitigating uncertainties, whose bounds are estimated experimentally.
+The present work introduces an adaptable input definition ($u_\omega$) capable of accommodating any nonlinear
+compensatory mechanisms within the ESC that define ($u_p$). Utilizing this input definition, the nonlinear control model
+of the system is developed. This model enables the design of improved controllers capable of explicitly mitigating
+uncertainties, whose bounds are estimated experimentally.
