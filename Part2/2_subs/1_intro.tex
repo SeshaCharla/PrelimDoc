@@ -1,0 +1,7 @@
+The propeller RPM measurement without any external sensors can be done using the back-EMF signals from the BLDC motor
+commutations. These commutation signals give the position of the rotor w.r.t the stator of the motor. With appropriate
+filtering, using Interrupt Service Routines or a high-frequency FPGA counter, these commutation signals can be used to
+estimate the angular velocity with high resolution. One drawback of this approach is that there is a minimum rotational
+speed bellow which the angular velocity can not be measured as there won't be any commutations during that time. This
+can be overcome using a separate high-frequency counter which is independent of the sampling process and resetting only
+when we have the new measurement.

@@ -1,0 +1,99 @@
+\section{RPM Measurement}
+Real-time angular velocity measurement involves counting commutation signals
+transmitted via an auxiliary cable from the ESC. This is achieved by utilizing
+an interrupt trigger to record the time elapsed since the previous commutation
+in an array, which resets after a defined sampling period. This approach
+enhances measurement resolution compared to counting commutations within a
+specific sampling period. Let $\hat \omega_{t_k}$ represent angular velocity
+measured using commutation durations ($\delta t$) and $\hat \omega_{n_C}$
+denote angular velocity measured using commutation counts ($\delta n_C$) within
+a sampling period \cite{PX4-autopilot-rpm}. Commutation duration, denoted as
+$\delta t$, is determined by a higher frequency counter, $f_t$, which is not
+bound by the overall system sampling rate. Therefore, we can express $\delta t$
+as $t_k / f_t$.
+
+%===
+\begin{align}
+    \hat \omega_{n_C} &= \frac{2 \pi}{N_p n_C} f_s \, rad/s, \quad
+    \hat \omega_{\delta t} = \frac{2 \pi}{N_p  \delta t}  = \frac{2 \pi f_t}{N_p t_k} \, rad/s
+\end{align}
+Where,
+\begin{align*}
+    N_p &- \text{No. of pole pairs in the motor (here, 7)}\\
+    f_s &- \text{Sampling frequency}\\
+    \delta t &- \text{Durtion between two commutations} = \frac{n_C}{f_s} = \frac{t_k}{f_t}\\
+    n_C &- \text{No. of commutations within a sampling period}
+\end{align*}
+%===
+In both cases, the minimum angular velocity from which the measurement begins is $\omega_{min} = \frac{2 \pi f_s}{N_p} = \frac{2 \pi f_t}{N_p t_{k_{max}}}$. This is because no commutation would be registered at a speed slower than $\omega_{min}$.
+
+As for the resolution of our measurement processes:
+%===
+\begin{align}
+    \min{\abs{\delta \omega_{n_C}}} &= \frac{2 \pi \min{\delta n_C}}{N_p n_C^2} f_s = \frac{2 \pi }{N_p n_C^2} f_s \\
+    \min{\abs{\delta \omega_{t_k}}} &= \frac{2 \pi \min{\delta t_k}}{N_p t_k^2} f_t = \frac{2 \pi}{N_p t_k^2} f_t\\
+    f_t >> f_s & \implies  t_k >> n_C \\
+    \implies & \min{\abs{\delta \omega_{t_k}}} < \min{\abs{\delta \omega_{n_C}}}
+\end{align}
+%===
+Thus higher resolution in rpm measurements can be achieved by choosing a arbitrarily high-frequency clounter.
+
+Given that multiple measurements of $\delta t$ occur within a single sampling
+instance and that the process is susceptible to noise due to interrupt skips,
+we adopt a median-based approach to estimate angular velocity at the end of a
+given sampling instance. Unlike other averaging methods, using the median
+effectively eliminates spikes in $\delta t$ that can occur when an interrupt is
+skipped. Detailed pseudocode for this algorithm is presented in
+Algorithm-\ref{alg::ISR} and Algorithm-\ref{alg::get_rpm}.
+%===
+
+\begin{minipage}{0.49\textwidth}
+\RestyleAlgo{boxruled}
+\LinesNumbered
+\begin{algorithm}[H]
+    \footnotesize
+    $n_C \peq 1$\;
+    \Comment*[l]{$C_c$ - Counter value at current interrupt}
+    \Comment*[l]{$P_c$ - Counter value at previous interrupt}
+    $\delta t_k = C_c - P_c$\;
+    \If{ $\delta t_k \leq 0$ }
+        {\Comment*[l]{Correcting for integer overflow}
+         $\delta t_k \peq 2^{32}$}
+    $\pmb{\delta t_k} [n_C-1] =  \delta t_k$\;
+    $P_c = C_c$
+    \caption{\small Interrupt Service Routine}
+    \label{alg::ISR}
+\end{algorithm}
+\end{minipage}
+%===
+\begin{minipage}{0.49\textwidth}
+\RestyleAlgo{boxruled}
+\LinesNumbered
+\begin{algorithm}[H]
+    \footnotesize
+    $N_p = 7$\;
+    $f_t = 10^6$\;
+    $M = \frac{2 \pi}{N_p} \times f_t$\;
+    \eIf {$n_C > 0$ and $n_C \leq n_{C_{max}}$ and $\norm{n_C - n_{C_{old}}} \leq \delta n_{C_{max}}$}
+        {\Comment*[l]{Median removes spikes in the data}
+         $\omega = \frac{M}{\text{Median}(\pmb{\delta t_k})}$\;
+         $ \omega_{old} = \omega$\;
+         $n_{C_{old}} = n_C$\;
+        }
+         {$\omega = \omega_{old}$}
+    $n_C = 0$
+    $\pmb{\delta t_k} = \pmb 0$\;
+    \caption{\small RPM Measurement Function}
+    \label{alg::get_rpm}
+\end{algorithm}
+\end{minipage}
+
+The measurement algorithm's validation process is conducted by comparing its results against the ESC data-log, as depicted in Fig.-\ref{fig::valid}. These validation plots not only confirm the algorithm's accuracy but also reveal the presence of non-linear input compensation mechanisms within the ESC.
+%===
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.6\textwidth]{Part2/figs/2_figs/rpm_feedback/rpm_meas.eps}
+    \caption{RPM vs PWM with and without propeller}
+    \label{fig::valid}
+\end{figure}
+%===
