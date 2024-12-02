@@ -1,0 +1,40 @@
+\chapter{Contributions and Future Work}
+The contributions of the present work include development, system identification and validation of diagnostic (and control) models for motor-propeller actuator system and diesel engine SCR system. These models are used for fault detection through parameter estimation through set membership techniques. A brief survey of methods of change detection and set membership based parameter estimation are also presented.
+
+\subsection{Contributions in actuator fault detection and reconfiguration}
+\begin{enumerate}
+        \item Development and hardware implementation of angular velocity measurement system for motor propeller system using the noisy commutation signals from the motor.
+        \item Development of the model of the actuator considering the high-frequency unknown nonlinear filters in the ESC of the actuator.
+        \item Identification of the model using linearized model parameter estimation and validation of the nonlinear model across the full range operation (ACC'24 paper \cite{seshaIdent}).
+        \item Closed-loop control of the actuator and preliminary work on fault detection. (MECC'24 (presented), SSRR'24 (presentedt))
+\end{enumerate}
+
+\subsection{Contributions in SCR-ASC aging diagnostics}
+\begin{enumerate}
+        \item Development, identification and validation of a linear diagnostic model using the CSTR and reduced order modelling assumptions. Demonstrating the viability of aging detection under limited operating range and absence of cross-sensitivity (MECC'24 (presented)).
+        \item Development of a discrete nonlinear model using PFR (Plug Flow Reactor model) that explicitly considers the effects of interplay between sampling and residence time. The model also avoids the causality reversal that happens in the CSTR model where the rate constant is a function of tail-pipe concentrations instead of inlet concentrations.
+        \item Development of an identifiable linear parameter model from the discrete nonlinear model for tailpipe $NO_x$ that is validated through parameter identification using only the available measurements on road conditions (No ammonia measurements).
+\end{enumerate}
+
+\section{Future Work and Publication Plan}
+The future work includes development of set membership based parameter estimation schemes and integrating them with change detection methods for fault diagnostics. Then, validating the above method using the experimental data. In the case of hexrotor the future work also involves developing the reconfiguration system (Control for static hover under actuator failure) and demonstrating it using simulation and experiments.
+
+\subsection{Set Membership based parameter estimation techniques}
+\begin{enumerate}
+        \item Integrating set membership methods with appropriate change detection methodology that can detect appropriate changes in parameter corresponding to specific actuator faults and SCR-ASC aging (Spring '25).
+        \item Integrating set membership methods with adaptive robust control theory (Spring '25).
+\end{enumerate}
+
+\subsection{Actuator fault detection and reconfiguration}
+\begin{enumerate}
+        \item Demonstrating the performance gains in the actuator using RPM feedback and SMI based adaptive robust control. (Journal paper 1 in IJRR. Draft by January'25)
+        \item Developing and demonstrating the actuator fault detection that detects propeller damage, breaking and touching surfaces using set membership techniques. (Journal Paper 2, Spring '25)
+        \item Developing the reconfiguration of the tilted hexrotor into static hover under actuator faults while compensating for the unbalanced angular momentum using RPM feedback. Demonstrating the control design using simulation and with available resources an experimental setup (Journal Paper 3. Summer '25 and beyond)
+\end{enumerate}
+
+\subsection{SCR-ASC aging diagnostics}
+\begin{enumerate}
+        \item Demonstrating the validity of the parametric model on truck data. Publishing (with approval from Cummins) the model development and validation results. (Journal paper 4. JDSMC. February '25)
+        \item Developing a fault detection methodology, based on the change in specific parameter sets, for the nonlinear model and validating it with the experimental data. (Journal paper 5. JDSMC. Spring&Summer '25).
+        \item Implementation considerations of the algorithm using available hardware.
+\end{enumerate}
