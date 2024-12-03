@@ -37,7 +37,7 @@ estimates. The parameters that describe the ellipsoid $\theta_t, \kappa_t, C_t =
         \caption{General framework of OBE algorithm's recursion \cite{deller1994unifying}}
 \end{algorithm}
 
-$\alpha_t$ and $\beta_t$ are positive weighing sequences chosen according to the particular OBE algorithm employed. The weights are chosen to explicitly or implicitly minimize the 'size' of the set $\mathcal{E}_t$ at each iteration. When the optimal weights do not exist, the updating is stopped by setting $\beta_t  = 0$ and/or $\alpha_t = 1$.  $\alpha_t$ and $\beta_t$ can be tied together by making them a function of a single parameter $\lambda_i$. Commonly, there are three optimization criteria that can be employed:
+$\alpha_t$ and $\beta_t$ are positive weighing sequences chosen according to the particular OBE algorithm employed. The weights are chosen to explicitly or implicitly to minimize the 'size' of the set $\mathcal{E}_t$ at each iteration. When the optimal weights do not exist, the updating is stopped by setting $\beta_t  = 0$ and/or $\alpha_t = 1$.  $\alpha_t$ and $\beta_t$ can be tied together by making them a function of a single parameter $\lambda_i$. Commonly, there are three optimization criteria that can be employed:
 \begin{enumerate}
         \item Determinant of the inverse of ellipsoid matrix which is proportional to the square of the volume of the ellipsoid.
         \begin{align}
@@ -54,7 +54,6 @@ $\alpha_t$ and $\beta_t$ are positive weighing sequences chosen according to the
 The general framework and the specific algorithms are presented in \cite{deller2002set}. The recursion part of the OBE algorithm is very similar to the recursive least-squares algorithm \cite{deller1989set} except for the choice of $\alpha_t$ and $\beta_t$ which are the result of minimizing the 'size' of the ellipsoid.
 
 
-\subsection{Fault detection using SMI techniques}
 
-
+\input{Part1/2_subs/FDI.tex}
 \input{Part1/2_subs/SMI_ARC.tex}
