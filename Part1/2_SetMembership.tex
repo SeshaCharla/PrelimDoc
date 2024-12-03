@@ -1,0 +1,60 @@
+\section{Set Membership Identification}
+
+Set membership identification is a class of techniques for estimating parameters of a linear or affine in parameter systems under a priori information about the error bounds that constraints the solution to certain set. These algorithms usually estimate discrete time affine-in-parameters models of the form:
+\begin{align}
+        y_t &= \theta^T x_t + \varepsilon_t
+\end{align}
+Where, $y_t$ is the output vector, $x_t$ is the sequence of measurement vectors (regressors) and $\varepsilon_t$ is an error or disturbance or an unknown input sequence which is magnitude bounded. Specifically, there exists a positive sequence $\lrf{\gamma_t}$ such that:
+\begin{align}
+        \abs{\varepsilon_t} < \gamma_t \qquad \forall \, t
+\end{align}
+
+Among the class of set membership techniques, Optimal Bounding Ellipsoid (OBE) algorithms are of particular interest for their superior adaptation, improved accuracy, efficient use of innovation data, improved computation efficiency, and increased robustness to measurement noise and to deviation from assumed noise model. OBE methods are algorithmically similar to recursive least squares but the philosophy, operation and behavior of the OBE methods is significantly different.
+
+Geometrically, the error bounds at each time $t$ imply two hyperplanes in parameter space, between which the true value of the parameter vector must lie. These planes form an open 'hyper-strip' $H_t$ between the planes. These pairs of hyperplanes over time forms a sequence of polytopes $P_t$.
+\begin{align}
+        H^+_t &= \lrf{\theta | y_t = \theta^T x_t + \gamma_t} \qquad
+        H^-_t  = \lrf{\theta | y_t = \theta^T x_t - \gamma_t}\\
+        H_t   &= \lrf{\theta | \abs{y_t - \theta^T x_t} < \gamma_t}\\
+        P_t   &= \bigcap_{t=1}^{\infty} H_t
+\end{align}
+The OBE algorithm produces a sequence of bounding hyper-ellipsoids, $\lrf{\mathcal{E}_t}_{t = m}^{\infty}$, which attempt, at each t, to tightly bound the exact polytopes in some sense. The interior of the hyper-ellipsoid at a time $t \geq m$ is the hyper-ellipsoidal membership set.
+\begin{align}
+        \mathcal{E}_t = \lrf{\theta | \lr{\theta - \theta_t}^T \kappa_t^{-1} C_t \lr{\theta - \theta_t} < 1}
+\end{align}
+$\theta_t$ is the centroid of the ellipsoid, often used as the point estimate of $\theta$ when required. The ellipsoids
+are monotonically non-increasing in some measure of sizes and under specific conditions they converge to point
+estimates. The parameters that describe the ellipsoid $\theta_t, \kappa_t, C_t = P_t^{-1}$ are recursively computed as follows:
+
+\begin{algorithm}
+        \begin{align*}
+                \Gamma_t &= x_t^T P_{t-1} x_t \qquad (scalar)\\
+                \varepsilon_t &= y_t - \theta_{t-1}^T x_t\\
+                P_t &= \frac{1}{\alpha_t} \lrb{P_{t-1} - \frac{\beta_t P_{t-1} x_t x_t^T P_{t-1}}{\alpha_t + \beta_t \Gamma_t}}\\
+                \theta_t &= \theta_{t-1} + \beta_t P_t x_t \varepsilon_t\\
+                \kappa_t &= \alpha_t \kappa_{t-1} + \beta_t \gamma_t - \frac{\alpha_t \beta_t \varepsilon_t^2}{\alpha_t + \beta_t \Gamma_t}
+        \end{align*}
+        \caption{General framework of OBE algorithm's recursion \cite{deller1994unifying}}
+\end{algorithm}
+
+$\alpha_t$ and $\beta_t$ are positive weighing sequences chosen according to the particular OBE algorithm employed. The weights are chosen to explicitly or implicitly minimize the 'size' of the set $\mathcal{E}_t$ at each iteration. When the optimal weights do not exist, the updating is stopped by setting $\beta_t  = 0$ and/or $\alpha_t = 1$.  $\alpha_t$ and $\beta_t$ can be tied together by making them a function of a single parameter $\lambda_i$. Commonly, there are three optimization criteria that can be employed:
+\begin{enumerate}
+        \item Determinant of the inverse of ellipsoid matrix which is proportional to the square of the volume of the ellipsoid.
+        \begin{align}
+                \mu_t^{vol} &= \det \lrf{\kappa_t C_t^{-1}}
+        \end{align}
+
+        \item Trace of the inverse ellipsoid matrix which is proportional to the sum of squares of the ellipsoid's semi-axes.
+        \begin{align}
+                \mu_t^{tr} &= trace \lrf{\kappa_t C_t^{-1}}
+        \end{align}
+
+        \item The parameter $\kappa_t$ (QOBE algorithm \cite{deller1993least}). This criterion in some cases results in directly ensuring the $\theta$ estimates lie in the hyperplanes.
+\end{enumerate}
+The general framework and the specific algorithms are presented in \cite{deller2002set}. The recursion part of the OBE algorithm is very similar to the recursive least-squares algorithm \cite{deller1989set} except for the choice of $\alpha_t$ and $\beta_t$ which are the result of minimizing the 'size' of the ellipsoid.
+
+
+\subsection{Fault detection using SMI techniques}
+
+
+\input{Part1/2_subs/SMI_ARC.tex}

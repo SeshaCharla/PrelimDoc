@@ -1,0 +1,66 @@
+\section{Change Detection}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width = 0.7\textwidth]{./Part1/figs/change_flow.png}
+        \caption{Structure of the change detection based on hypothesis testing}
+\end{figure}
+
+Change detection or alarming is the task of finding abrupt or rapid changes in the estimate of the chosen parameter/state that is used as a guard condition to trigger another process like resetting the parameters of a filter or start the fault isolation and identification process, etc. This, the connecting step that takes the process from estimation to decision-making.
+
+The problem of statistical change detection can be stated as the determination of change time $k_a$ or $t_a$ based on the predefined thresholds $h$ for the given time-series data $\theta_t$ with noise. This can be done both by using online (recursive) or offline (windowed) approaches. The change detection approaches can be divided into hypothesis testing and estimation/information approaches. Hypothesis testing algorithms have two distinct and independent parts to them, $1)$ A distance measure (or Residual) and $2)$ A stopping rule. In estimation approaches both of these parts are generally done in one step as the distance measure (residual) generated using this approach can be directly throsholeded without the averaging step of the stopping rule.
+
+\subsection{Stopping Rule}
+
+The stopping rule gives the alarm when $\hat \theta_t$ exceeds a certain threshold. The difference between the change detection and stopping rule is that the stopping rule captures the parameter exceeding the alarm which can be abrupt, linear or incipient (as in the case of aging detection or propeller drag is monotonically changing) but the change detection happens at a point of time when the decision needs to be made (catalyst has aged and is at EUL, propeller is broken). There is prior knowledge on the threshold for stopping rule. A fundamental nonlinear stopping rules is \cite{malladi1999generalized}:
+\begin{itemize}
+        \item Sequential Probability Ration Test (SPRT) algorithm
+        \item Cumulative Sum (CUMSUM) algorithm (SPRT with no reset level)
+\end{itemize}
+
+\begin{algorithm}[H]
+        \begin{align*}
+                g_t &= g_{t-1} + y_t - \nu\\
+                g_t &= 0 \: \text{and} \: \hat k = t \: \text{if} \: g_t < a < 0\\
+                g_t &= 0 \: \text{and} \: t_a = t \: \text{and alarm if} \: g_t > h > 0\\
+                \text{Design Parameter}&: \text{Drift } \nu, \text{ threshold } h, \text{ and reset level } a\\
+                \text{Output}&: \text{Alarm time } t_a
+        \end{align*}
+        \caption{SPRT Algorithm (CUMSUM if a=0)}
+\end{algorithm}
+
+An application of CUMSUM algorithm for filtering test and truck data in presence of jumps in the process in presented in appendix. This test can be converted into a two-sided test by including another alarm condition with $-h$.
+
+
+\subsection{Estimation/Information based approach to change detection (Distance Measure)}
+Input to the stopping rule is a distance measure $s_t$ which can be the residual of the estimate or residual normalized to unit variance. The alternative is using the square of the residual (again, can be normalized to unit expectation of variance).
+
+In estimation based approach the value of the distance measure can be directly used for generating alarm. Consider the linear parameter model:
+\begin{align}
+        y &= \phi^T \theta + \varepsilon
+\end{align}
+We want to test the following hypotheses:
+\begin{itemize}
+        \item[H0:] The parameter vectors are the same as nominal, $\theta = \theta_0$
+        \item[H1:] The parameter vector $\theta$ is significantly different from the nominal $\theta_0$ and closer to $\theta_1$, the null hypothesis is rejected.
+\end{itemize}
+The distance measures that can be used to test the above hypotheses must not only include the detection for change in mean of $\hat \theta$ but also change in variance of $\hat \theta$. The following are a few distance measures from literature:
+
+\begin{enumerate}
+        \item \itbf{Prediction Error} \cite{segen1980detecting}:
+        \begin{align}
+                s^{PE} &= \frac{\norm{y - \phi^T \theta_0}}{\lambda_0} - N
+        \end{align}
+        \item \itbf{Generalized Likelihood Ratio} \cite{appel1983adaptive}:
+        \begin{align}
+                s^{GLR} &= N \log \frac{\lambda_0}{\lambda_1} + \frac{\norm{y - \phi^T \theta_0}^2}{\lambda_0}
+                                                                - \frac{\norm{y - \phi^T \theta_0}^2}{\lambda_0}
+        \end{align}
+        \item \itbf{KL Divergence Test}\cite{kumamaru1996robust}:
+        \begin{align}
+                s^{DIV} &= N \lr{\frac{\lambda_0}{\lambda_1} - 1}
+                                + \lr{1 + \frac{\lambda_0}{\lambda_1}} \frac{\norm{y - \phi^T \theta_0}^2}{\lambda_0}
+                                - 2 \frac{\lr{y - \phi^T \theta_0}^T \lr{y - \phi^T \theta_1}}{\lambda_1}
+        \end{align}
+\end{enumerate}
+$\lambda_0$, $\lambda_1$ are the nominal variance in the noise for the model with given parameters.
